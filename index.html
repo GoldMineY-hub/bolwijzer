@@ -100,10 +100,12 @@
           </div>
           <div class="form-group">
             <label class="form-label">Verzendmethode</label>
-            <div class="radio-group">
-              <button class="radio-btn active" data-method="vvb" onclick="setShipping(this)">Verzenden via Bol (VVB)</button>
-              <button class="radio-btn" data-method="eigen" onclick="setShipping(this)">Eigen verzending (PostNL)</button>
-            </div>
+            <select class="form-select" id="verzendMethode" onchange="shippingMethod=this.value;updateVerzendInfo();">
+              <option value="vvb">Verzenden via Bol (VVB)</option>
+              <option value="postnl">Eigen: PostNL</option>
+              <option value="dhl">Eigen: DHL eCommerce</option>
+              <option value="dpd">Eigen: DPD</option>
+            </select>
           </div>
           <div class="form-group full" id="verzendInfo" style="margin-top:-8px;">
             <div style="font-size:12px;color:var(--text-muted);padding:8px 12px;background:rgba(255,255,255,0.02);border-radius:8px;" id="verzendDetail">VVB Standaard pakket NL: &euro;5,07 excl. BTW</div>
@@ -300,22 +302,36 @@
   /* ---- STATE ---- */
   let shippingMethod='vvb', levertijd=1, bestemming='nl';
 
-  /* Verzendkosten tabel (excl. BTW) */
+  /* Verzendkosten tabel (excl. BTW tenzij anders vermeld)
+     VVB: bol.com partnerplatform tarieven 2025/2026
+     PostNL: postnl.nl zakelijke tarieven 2026 (excl. BTW)
+     DHL: dhlecommerce.nl tarieven 2026 (excl. BTW)
+     DPD: dpd.nl tarieven 2026 (excl. BTW) */
   const verzendTarieven = {
     vvb: {
       brievenbus: { nl: 3.27, be: 5.38 },
       pakket:     { nl: 5.07, be: 5.38 },
       groot:      { nl: 5.07, be: 5.38 }
     },
-    eigen: {
+    postnl: {
       brievenbus: { nl: 3.43, be: 5.74 },
       pakket:     { nl: 5.74, be: 8.26 },
       groot:      { nl: 10.91, be: 14.05 }
+    },
+    dhl: {
+      brievenbus: { nl: 3.18, be: 5.50 },
+      pakket:     { nl: 4.92, be: 7.85 },
+      groot:      { nl: 12.36, be: 15.25 }
+    },
+    dpd: {
+      brievenbus: { nl: 3.25, be: 5.40 },
+      pakket:     { nl: 5.17, be: 7.50 },
+      groot:      { nl: 10.50, be: 13.80 }
     }
   };
 
   const pakketLabels = { brievenbus: 'Brievenbuspakket', pakket: 'Standaard pakket', groot: 'Groot pakket' };
-  const methodeLabels = { vvb: 'VVB', eigen: 'PostNL' };
+  const methodeLabels = { vvb: 'VVB', postnl: 'PostNL', dhl: 'DHL', dpd: 'DPD' };
 
   function updateVerzendInfo() {
     const pkg = document.getElementById('pakketGrootte').value;
