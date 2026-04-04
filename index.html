@@ -25,13 +25,13 @@
   <nav class="nav">
     <div class="nav-inner">
       <a href="/" class="logo"><span class="logo-bol">Bol</span><span class="logo-wijzer">Wijzer</span><span class="logo-dot">.</span></a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="navLinks">
         <li><a href="#calculator" class="active">Tools</a></li>
         <li><a href="artikelen/boloo-review.html">Reviews</a></li>
         <li><a href="artikelen/boloo-vs-rylee.html">Vergelijkingen</a></li>
         <li><a href="artikelen/verkopen-op-bol-com.html">Gidsen</a></li>
       </ul>
-      <button class="nav-mobile-btn" aria-label="Menu" onclick="this.nextElementSibling?.classList.toggle('mobile-open')">&#9776;</button>
+      <button class="nav-mobile-btn" aria-label="Menu" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">&#9776;</button>
     </div>
   </nav>
 
@@ -68,18 +68,31 @@
             <label class="form-label" for="category">Productcategorie</label>
             <select class="form-select" id="category">
               <option value="">Selecteer categorie...</option>
-              <option value="7|0.99">Elektronica &amp; Witgoed (7% + &euro;0,99)</option>
-              <option value="7|0.99">Gezondheid &amp; Persoonlijke Verzorging (7% + &euro;0,99)</option>
-              <option value="10|0.99">Computer &amp; Gaming (10% + &euro;0,99)</option>
-              <option value="12|0.99">Tuin &amp; Klussen (12% + &euro;0,99)</option>
-              <option value="12|0.99">Sport &amp; Vrije Tijd (12% + &euro;0,99)</option>
-              <option value="15|0.99">Kleding &amp; Mode (15% + &euro;0,99)</option>
-              <option value="15|0.99">Speelgoed (15% + &euro;0,99)</option>
-              <option value="15|0.99">Wonen &amp; Slapen (15% + &euro;0,99)</option>
-              <option value="15|0.99">Baby &amp; Kind (15% + &euro;0,99)</option>
-              <option value="15|0.99">Dier &amp; Dierbenodigdheden (15% + &euro;0,99)</option>
-              <option value="15|0.99">Eten &amp; Drinken (15% + &euro;0,99)</option>
-              <option value="15|0">Boeken (15%, geen vast bedrag)</option>
+              <option value="4.1|0.85">Elektrisch Gereedschap (4.1% + &euro;0,85)</option>
+              <option value="6|0.85">Dierenvoer (6% + &euro;0,85)</option>
+              <option value="8|2.48">Computer Hardware (8% + &euro;2,48)</option>
+              <option value="8|2.48">Televisies &amp; Witgoed (8% + &euro;2,48)</option>
+              <option value="8|2.48">Mobiele Telefoons (8% + &euro;2,48)</option>
+              <option value="10.8|0.85">Kampeerartikelen (10.8% + &euro;0,85)</option>
+              <option value="12.4|0.85">Tuin &amp; Klussen (12.4% + &euro;0,85)</option>
+              <option value="12.4|0.85">Sport &amp; Vrije Tijd (12.4% + &euro;0,85)</option>
+              <option value="12.4|0.85">Speelgoed (12.4% + &euro;0,85)</option>
+              <option value="12.4|0.85">Wonen &amp; Slapen (12.4% + &euro;0,85)</option>
+              <option value="12.4|0.85">Baby &amp; Kind (12.4% + &euro;0,85)</option>
+              <option value="12.4|0.85">Koken, Tafelen &amp; Huishouden (12.4% + &euro;0,85)</option>
+              <option value="12.4|0.85">Dier &amp; Dierbenodigdheden (12.4% + &euro;0,85)</option>
+              <option value="12.4|0.85">Kantoor &amp; Schoolbenodigdheden (12.4% + &euro;0,85)</option>
+              <option value="12.4|0.85">Eten &amp; Drinken (12.4% + &euro;0,85)</option>
+              <option value="12.4|0.85">Klein Huishoudelijk (12.4% + &euro;0,85)</option>
+              <option value="13|0.85">Kleding &amp; Mode (13% + &euro;0,85)</option>
+              <option value="13|0.85">Schoenen (13% + &euro;0,85)</option>
+              <option value="13|0.85">Tassen &amp; Koffers (13% + &euro;0,85)</option>
+              <option value="14.1|0.85">Beddengoed (14.1% + &euro;0,85)</option>
+              <option value="15|0.85">Gezondheid &amp; Persoonlijke Verzorging (15% + &euro;0,85)</option>
+              <option value="15|0">Boeken (15% + mediatoeslag &euro;1,00)</option>
+              <option value="15|0">Film, Muziek &amp; Games (15% + mediatoeslag &euro;1,00)</option>
+              <option value="20.7|0.85">Sieraden (20.7% + &euro;0,85)</option>
+              <option value="12.4|0.85">Horloges (12.4% + &euro;0,85)</option>
             </select>
           </div>
           <div class="form-group">
@@ -375,17 +388,34 @@
 
   /* ---- COMMISSIE FINDER ---- */
   const commissies=[
-    {cat:'Elektronica & Witgoed',pct:7,vast:0.99},{cat:'Gezondheid & Persoonlijke Verzorging',pct:7,vast:0.99},
-    {cat:'Computer & Gaming',pct:10,vast:0.99},{cat:'Telefonie',pct:10,vast:0.99},
-    {cat:'Tuin & Klussen',pct:12,vast:0.99},{cat:'Sport & Vrije Tijd',pct:12,vast:0.99},
-    {cat:'Auto & Motor',pct:12,vast:0.99},{cat:'Kleding & Mode',pct:15,vast:0.99},
-    {cat:'Schoenen',pct:15,vast:0.99},{cat:'Sieraden & Horloges',pct:15,vast:0.99},
-    {cat:'Speelgoed',pct:15,vast:0.99},{cat:'Wonen & Slapen',pct:15,vast:0.99},
-    {cat:'Baby & Kind',pct:15,vast:0.99},{cat:'Dier & Dierbenodigdheden',pct:15,vast:0.99},
-    {cat:'Eten & Drinken',pct:15,vast:0.99},{cat:'Kantoor & Schoolbenodigdheden',pct:15,vast:0.99},
-    {cat:'Koken, Tafelen & Huishouden',pct:15,vast:0.99},{cat:'Tassen & Koffers',pct:15,vast:0.99},
-    {cat:'Boeken',pct:15,vast:0},{cat:'Film',pct:15,vast:0.99},{cat:'Muziek',pct:15,vast:0.99},
-    {cat:'Games',pct:15,vast:0.99},{cat:'Software',pct:7,vast:0.99},
+    {cat:'Elektrisch Gereedschap',pct:4.1,vast:0.85},
+    {cat:'Dierenvoer',pct:6,vast:0.85},
+    {cat:'Computer Hardware',pct:8,vast:2.48},
+    {cat:'Televisies & Witgoed',pct:8,vast:2.48},
+    {cat:'Mobiele Telefoons',pct:8,vast:2.48},
+    {cat:'Drones',pct:8,vast:2.48},
+    {cat:'Grote Meubelen',pct:8,vast:2.48},
+    {cat:'Kampeerartikelen',pct:10.8,vast:0.85},
+    {cat:'Tuin & Klussen',pct:12.4,vast:0.85},
+    {cat:'Sport & Vrije Tijd',pct:12.4,vast:0.85},
+    {cat:'Speelgoed',pct:12.4,vast:0.85},
+    {cat:'Wonen & Slapen',pct:12.4,vast:0.85},
+    {cat:'Baby & Kind',pct:12.4,vast:0.85},
+    {cat:'Koken, Tafelen & Huishouden',pct:12.4,vast:0.85},
+    {cat:'Dier & Dierbenodigdheden',pct:12.4,vast:0.85},
+    {cat:'Kantoor & Schoolbenodigdheden',pct:12.4,vast:0.85},
+    {cat:'Eten & Drinken',pct:12.4,vast:0.85},
+    {cat:'Klein Huishoudelijk',pct:12.4,vast:0.85},
+    {cat:'Horloges',pct:12.4,vast:0.85},
+    {cat:'Auto & Motor',pct:12.4,vast:0.85},
+    {cat:'Kleding & Mode',pct:13,vast:0.85},
+    {cat:'Schoenen',pct:13,vast:0.85},
+    {cat:'Tassen & Koffers',pct:13,vast:0.85},
+    {cat:'Beddengoed',pct:14.1,vast:0.85},
+    {cat:'Gezondheid & Persoonlijke Verzorging',pct:15,vast:0.85},
+    {cat:'Boeken (+ mediatoeslag \u20AC1)',pct:15,vast:0},
+    {cat:'Film, Muziek & Games (+ mediatoeslag \u20AC1)',pct:15,vast:0},
+    {cat:'Sieraden',pct:20.7,vast:0.85},
   ];
   function renderCommissie(filter=''){
     const g=document.getElementById('commGrid');g.innerHTML='';

@@ -438,7 +438,22 @@ a { color: inherit; text-decoration: none; }
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .nav-links { display: none; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(6,9,15,0.96);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    flex-direction: column;
+    padding: 20px 24px;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links.mobile-open { display: flex; }
+  .nav-links a.active::after { display: none; }
   .nav-mobile-btn { display: block; }
   .form-grid { grid-template-columns: 1fr; }
   .compare-grid { grid-template-columns: 1fr; }
