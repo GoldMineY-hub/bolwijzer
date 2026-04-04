@@ -91,10 +91,28 @@
             <input class="form-input" type="number" id="inkoopprijs" placeholder="Bijv. 8.50" step="0.01" min="0">
           </div>
           <div class="form-group">
+            <label class="form-label">Pakketgrootte</label>
+            <select class="form-select" id="pakketGrootte">
+              <option value="brievenbus">Brievenbuspakket (max 38x26,5x3,2 cm)</option>
+              <option value="pakket" selected>Standaard pakket tot 10 kg</option>
+              <option value="groot">Groot pakket tot 23 kg</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label class="form-label">Verzendmethode</label>
             <div class="radio-group">
-              <button class="radio-btn active" data-method="eigen" onclick="setShipping(this)">Eigen verzending</button>
-              <button class="radio-btn" data-method="lvb" onclick="setShipping(this)">LVB (Logistiek via Bol)</button>
+              <button class="radio-btn active" data-method="vvb" onclick="setShipping(this)">Verzenden via Bol (VVB)</button>
+              <button class="radio-btn" data-method="eigen" onclick="setShipping(this)">Eigen verzending (PostNL)</button>
+            </div>
+          </div>
+          <div class="form-group full" id="verzendInfo" style="margin-top:-8px;">
+            <div style="font-size:12px;color:var(--text-muted);padding:8px 12px;background:rgba(255,255,255,0.02);border-radius:8px;" id="verzendDetail">VVB Standaard pakket NL: &euro;5,07 excl. BTW</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Bestemming</label>
+            <div class="radio-group">
+              <button class="radio-btn active" data-dest="nl" onclick="setDest(this)">Nederland</button>
+              <button class="radio-btn" data-dest="be" onclick="setDest(this)">Belgie</button>
             </div>
           </div>
           <div class="form-group">
@@ -280,8 +298,35 @@
 
   <script>
   /* ---- STATE ---- */
-  let shippingMethod='eigen', levertijd=1;
-  function setShipping(b){document.querySelectorAll('#tab-calc .radio-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');shippingMethod=b.dataset.method;}
+  let shippingMethod='vvb', levertijd=1, bestemming='nl';
+
+  /* Verzendkosten tabel (excl. BTW) */
+  const verzendTarieven = {
+    vvb: {
+      brievenbus: { nl: 3.27, be: 5.38 },
+      pakket:     { nl: 5.07, be: 5.38 },
+      groot:      { nl: 5.07, be: 5.38 }
+    },
+    eigen: {
+      brievenbus: { nl: 3.43, be: 5.74 },
+      pakket:     { nl: 5.74, be: 8.26 },
+      groot:      { nl: 10.91, be: 14.05 }
+    }
+  };
+
+  const pakketLabels = { brievenbus: 'Brievenbuspakket', pakket: 'Standaard pakket', groot: 'Groot pakket' };
+  const methodeLabels = { vvb: 'VVB', eigen: 'PostNL' };
+
+  function updateVerzendInfo() {
+    const pkg = document.getElementById('pakketGrootte').value;
+    const tarief = verzendTarieven[shippingMethod][pkg][bestemming];
+    const label = methodeLabels[shippingMethod] + ' ' + pakketLabels[pkg] + ' ' + bestemming.toUpperCase();
+    document.getElementById('verzendDetail').textContent = label + ': \u20AC' + tarief.toFixed(2) + ' excl. BTW';
+  }
+
+  function setShipping(b){document.querySelectorAll('[data-method]').forEach(x=>x.classList.remove('active'));b.classList.add('active');shippingMethod=b.dataset.method;updateVerzendInfo();}
+  function setDest(b){document.querySelectorAll('[data-dest]').forEach(x=>x.classList.remove('active'));b.classList.add('active');bestemming=b.dataset.dest;updateVerzendInfo();}
+  document.getElementById('pakketGrootte').addEventListener('change', updateVerzendInfo);
   function setLevertijd(b){document.querySelectorAll('#tab-koop .radio-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');levertijd=parseInt(b.dataset.lt);}
 
   /* ---- TABS ---- */
@@ -296,7 +341,7 @@
   function berekenWinst(){
     const c=document.getElementById('category').value,vp=parseFloat(document.getElementById('verkoopprijs').value),ip=parseFloat(document.getElementById('inkoopprijs').value),rp=parseInt(document.getElementById('retourSlider').value);
     if(!c||isNaN(vp)||isNaN(ip)||vp<=0){alert('Vul alle velden in.');return;}
-    const[p,v]=c.split('|').map(Number),comm=vp*p/100+v,verz=shippingMethod==='eigen'?4.95:6.50,ret=rp/100*verz,tx=0.30,nw=vp-ip-comm-verz-ret-tx,mg=nw/vp*100,pos=nw>=0;
+    const[p,v]=c.split('|').map(Number),pkg=document.getElementById('pakketGrootte').value,comm=vp*p/100+v,verz=verzendTarieven[shippingMethod][pkg][bestemming],ret=rp/100*verz,tx=0.30,nw=vp-ip-comm-verz-ret-tx,mg=nw/vp*100,pos=nw>=0;
     document.getElementById('resultProfit').textContent='\u20AC'+nw.toFixed(2);
     document.getElementById('resultProfit').className='result-profit '+(pos?'pos':'neg');
     document.getElementById('resultMarge').textContent=mg.toFixed(1)+'% marge';
@@ -305,7 +350,7 @@
     document.getElementById('rIP').textContent='- \u20AC'+ip.toFixed(2);
     document.getElementById('rCL').textContent='Bol.com commissie ('+p+'% + \u20AC'+v.toFixed(2)+' + \u20AC0,30)';
     document.getElementById('rC').textContent='- \u20AC'+(comm+tx).toFixed(2);
-    document.getElementById('rVL').textContent='Verzendkosten ('+(shippingMethod==='eigen'?'eigen':'LVB')+')';
+    document.getElementById('rVL').textContent='Verzendkosten ('+methodeLabels[shippingMethod]+', '+pakketLabels[document.getElementById('pakketGrootte').value]+', '+bestemming.toUpperCase()+')';
     document.getElementById('rV').textContent='- \u20AC'+verz.toFixed(2);
     document.getElementById('rRL').textContent='Retourkosten ('+rp+'%)';
     document.getElementById('rR').textContent='- \u20AC'+ret.toFixed(2);
