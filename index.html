@@ -61,13 +61,55 @@
     .step-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--text); }
     .step-item p { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
 
+    /* WAT ALS GRID */
+    .wa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .wa-result-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; text-align: center; margin-top: 14px; padding: 12px 16px; background: var(--bg-card); border-radius: 8px; }
+    .eco-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .eco-link { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--radius-sm); text-decoration: none; transition: all 0.2s; cursor: pointer; }
+    .eco-link:hover { border-color: rgba(0,82,255,0.3); }
+    .btn-row { display: flex; gap: 10px; }
+    .calc-btn-row { display: flex; gap: 10px; }
+    .calc-btn-row .calc-btn { flex: 1; }
+    .eco-teaser { margin-top: 14px; padding: 12px 16px; background: rgba(0,82,255,0.06); border-radius: 8px; display: flex; align-items: center; gap: 10px; }
+    .internal-cta { margin-top: 24px; padding: 16px 20px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 14px; }
+    .internal-cta-btn { padding: 9px 18px; background: var(--blue-glow); border: 1px solid rgba(0,82,255,0.25); color: var(--blue-soft); border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .example-btn { flex: 0 0 auto; padding: 15px 20px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-dim); font-size: 13px; font-weight: 500; font-family: var(--font-body); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .example-btn:hover { border-color: rgba(0,82,255,0.3); }
+    .export-btn { flex: 1; padding: 12px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-dim); font-size: 13px; font-weight: 500; font-family: var(--font-body); cursor: pointer; transition: all 0.2s; }
+    .export-btn:hover { border-color: rgba(0,82,255,0.3); }
+
     @media (max-width: 768px) {
-      .result-metrics { grid-template-columns: 1fr; }
+      .hero-calc { padding: 32px 16px 0; }
+      .hero-calc-header h1 { letter-spacing: -1px; }
+      .result-metrics { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .result-metric { padding: 12px 8px; }
+      .result-metric-val { font-size: 20px; }
       .tips-grid { grid-template-columns: 1fr; }
       .steps-row { grid-template-columns: 1fr 1fr; }
+      .wa-grid { grid-template-columns: 1fr; }
+      .wa-result-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .eco-grid { grid-template-columns: 1fr; }
+      .card { padding: 24px 18px; }
+      .trust-badges { gap: 12px; }
+      .trust-badge { font-size: 12px; }
+      .faq-q { font-size: 14px; padding: 16px 0; }
+      .section { padding: 48px 16px; }
     }
     @media (max-width: 480px) {
+      .hero-calc { padding: 24px 14px 0; }
+      .hero-calc-header h1 { font-size: 28px; }
+      .result-metrics { grid-template-columns: 1fr; }
+      .wa-result-grid { grid-template-columns: 1fr; }
       .steps-row { grid-template-columns: 1fr; }
+      .btn-row { flex-direction: column; }
+      .calc-btn-row { flex-direction: column; }
+      .example-btn { width: 100%; }
+      .card { padding: 20px 14px; }
+      .trust-badges { flex-direction: column; align-items: center; gap: 8px; }
+      .eco-teaser { flex-direction: column; text-align: center; }
+      .internal-cta { flex-direction: column; text-align: center; }
+      .section { padding: 36px 14px; }
+      .footer { padding: 36px 14px 20px; }
     }
   </style>
 </head>
@@ -181,9 +223,9 @@
           </div>
         </div>
       </div>
-      <div style="display:flex;gap:10px;">
-        <button class="calc-btn" onclick="berekenWinst()" style="flex:1;">Bereken mijn winst</button>
-        <button onclick="vulVoorbeeld()" style="flex:0 0 auto;padding:15px 20px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-dim);font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;transition:all 0.2s;white-space:nowrap;" onmouseover="this.style.borderColor='rgba(0,82,255,0.3)'" onmouseout="this.style.borderColor='var(--border)'">&#128204; Probeer voorbeeld</button>
+      <div class="calc-btn-row">
+        <button class="calc-btn" onclick="berekenWinst()">Bereken mijn winst</button>
+        <button onclick="vulVoorbeeld()" class="example-btn">&#128204; Probeer voorbeeld</button>
       </div>
 
       <!-- ENHANCED RESULTS -->
@@ -222,7 +264,7 @@
         <!-- WAT ALS SIMULATOR -->
         <div id="watAlsBox" style="margin-top:16px;padding:20px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius-sm);">
           <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:14px;">&#128300; Wat als... simulator</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div class="wa-grid">
             <div>
               <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">Retourpercentage wijzigen</div>
               <div class="slider-row">
@@ -238,7 +280,7 @@
               </div>
             </div>
           </div>
-          <div id="waResult" style="margin-top:14px;padding:12px 16px;background:var(--bg-card);border-radius:8px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
+          <div class="wa-result-grid" id="waResult">
             <div><div style="font-size:11px;color:var(--text-muted);">Nieuwe winst</div><div style="font-size:18px;font-weight:700;" id="waWinst">-</div></div>
             <div><div style="font-size:11px;color:var(--text-muted);">Nieuwe marge</div><div style="font-size:18px;font-weight:700;" id="waMarge">-</div></div>
             <div><div style="font-size:11px;color:var(--text-muted);">Verschil</div><div style="font-size:18px;font-weight:700;" id="waVerschil">-</div></div>
@@ -246,25 +288,25 @@
         </div>
 
         <!-- EXPORT / DEEL KNOPPEN -->
-        <div style="display:flex;gap:10px;margin-top:16px;">
-          <button onclick="kopieerResultaat()" style="flex:1;padding:12px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-dim);font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;transition:all 0.2s;" id="kopieerBtn">&#128203; Kopieer resultaat</button>
-          <button onclick="deelResultaat()" style="flex:1;padding:12px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-dim);font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;transition:all 0.2s;">&#128279; Deel link</button>
+        <div class="btn-row" style="margin-top:16px;">
+          <button onclick="kopieerResultaat()" class="export-btn" id="kopieerBtn">&#128203; Kopieer resultaat</button>
+          <button onclick="deelResultaat()" class="export-btn">&#128279; Deel link</button>
         </div>
 
         <!-- BOLWIJZER ECOSYSTEM CTA -->
         <div style="margin-top:20px;padding:22px;background:linear-gradient(135deg,var(--blue-glow),rgba(249,115,22,0.04));border:1px solid rgba(0,82,255,0.15);border-radius:12px;">
           <div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:10px;">Ga verder met BolWijzer</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <a href="#tools" style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius-sm);text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.borderColor='rgba(0,82,255,0.3)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div class="eco-grid">
+            <a href="#tools" class="eco-link">
               <span style="font-size:20px;">&#128202;</span>
               <div><div style="font-size:13px;font-weight:600;color:var(--text);">Commissie Finder</div><div style="font-size:11px;color:var(--text-muted);">Alle tarieven per categorie</div></div>
             </a>
-            <a href="#tools" onclick="setTimeout(()=>switchTab('koop'),100)" style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius-sm);text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.borderColor='rgba(0,82,255,0.3)'" onmouseout="this.style.borderColor='var(--border)'">
+            <a href="#tools" onclick="setTimeout(()=>switchTab('koop'),100)" class="eco-link">
               <span style="font-size:20px;">&#127942;</span>
               <div><div style="font-size:13px;font-weight:600;color:var(--text);">Koopblok Check</div><div style="font-size:11px;color:var(--text-muted);">Schat je kans in</div></div>
             </a>
           </div>
-          <div style="margin-top:14px;padding:12px 16px;background:rgba(0,82,255,0.06);border-radius:8px;display:flex;align-items:center;gap:10px;">
+          <div class="eco-teaser">
             <span style="font-size:16px;">&#128161;</span>
             <div style="font-size:12px;color:var(--text-dim);line-height:1.5;">
               <strong style="color:var(--text);">Binnenkort op BolWijzer:</strong> automatische marge-berekening voor je hele assortiment met slimme AI. <a href="#newsletter" style="color:var(--blue-soft);text-decoration:underline;text-underline-offset:2px;">Blijf op de hoogte</a>
@@ -350,10 +392,10 @@
             <strong style="color:var(--text);">Subcategorieen.</strong> Bol.com kan afwijkende percentages hanteren per subcategorie. Check altijd het exacte bedrag in je verkoopaccount.
           </span>
         </div>
-        <div style="margin-top:24px;padding:16px 20px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius-sm);display:flex;align-items:center;gap:14px;">
+        <div class="internal-cta">
           <span style="font-size:20px;">&#128176;</span>
           <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--text);">Wil je weten wat je overhoudt?</div><div style="font-size:12px;color:var(--text-muted);">Gebruik de commissie hierboven in onze Winstcalculator voor een complete berekening.</div></div>
-          <a href="#calculator" style="padding:9px 18px;background:var(--blue-glow);border:1px solid rgba(0,82,255,0.25);color:var(--blue-soft);border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;">Naar calculator &#8593;</a>
+          <a href="#calculator" class="internal-cta-btn">Naar calculator &#8593;</a>
         </div>
       </div>
       <!-- KOOPBLOK CHECK -->
@@ -401,10 +443,10 @@
             <p id="kbVerdict" style="font-size:15px;color:var(--text-dim);max-width:400px;margin:0 auto;"></p>
           </div>
           <div class="score-factors" id="kbFactors"></div>
-          <div style="margin-top:24px;padding:16px 20px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius-sm);display:flex;align-items:center;gap:14px;">
+          <div class="internal-cta">
             <span style="font-size:20px;">&#128176;</span>
             <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--text);">Koopblok strategie bepalen?</div><div style="font-size:12px;color:var(--text-muted);">Check eerst of je marge het toelaat om je prijs te verlagen met onze Winstcalculator.</div></div>
-            <a href="#calculator" style="padding:9px 18px;background:var(--blue-glow);border:1px solid rgba(0,82,255,0.25);color:var(--blue-soft);border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;">Bereken winst &#8593;</a>
+            <a href="#calculator" class="internal-cta-btn">Bereken winst &#8593;</a>
           </div>
           <div style="margin-top:10px;text-align:center;font-size:12px;color:var(--text-muted);">
             Wil je je prijs automatisch laten aanpassen? Lees onze <a href="artikelen/boloo-vs-rylee.html" style="color:var(--text-dim);text-decoration:underline;text-underline-offset:2px;">vergelijking van repricer-tools</a>.
