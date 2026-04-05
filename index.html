@@ -101,6 +101,7 @@
         <span class="trust-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 4 vervoerders</span>
         <span class="trust-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Draait lokaal in je browser</span>
       </div>
+      <div style="margin-top:16px;font-size:13px;color:var(--text-muted);">&#128202; <span id="calcCounter">0</span> berekeningen uitgevoerd</div>
     </div>
 
     <!-- CALCULATOR CARD -->
@@ -180,7 +181,10 @@
           </div>
         </div>
       </div>
-      <button class="calc-btn" onclick="berekenWinst()">Bereken mijn winst</button>
+      <div style="display:flex;gap:10px;">
+        <button class="calc-btn" onclick="berekenWinst()" style="flex:1;">Bereken mijn winst</button>
+        <button onclick="vulVoorbeeld()" style="flex:0 0 auto;padding:15px 20px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-dim);font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;transition:all 0.2s;white-space:nowrap;" onmouseover="this.style.borderColor='rgba(0,82,255,0.3)'" onmouseout="this.style.borderColor='var(--border)'">&#128204; Probeer voorbeeld</button>
+      </div>
 
       <!-- ENHANCED RESULTS -->
       <div class="result" id="resultBox">
@@ -214,6 +218,39 @@
         </div>
         <!-- VERDICT -->
         <div id="resultVerdict" style="margin-top:16px;padding:14px 18px;border-radius:var(--radius-sm);font-size:14px;line-height:1.6;"></div>
+
+        <!-- WAT ALS SIMULATOR -->
+        <div id="watAlsBox" style="margin-top:16px;padding:20px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius-sm);">
+          <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:14px;">&#128300; Wat als... simulator</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">Retourpercentage wijzigen</div>
+              <div class="slider-row">
+                <input class="slider" type="range" id="waRetour" min="0" max="40" value="10" oninput="updateWatAls()">
+                <span class="slider-val" id="waRetourVal">10%</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">Verkoopprijs wijzigen</div>
+              <div class="slider-row">
+                <input class="slider" type="range" id="waPrijs" min="-30" max="30" value="0" oninput="updateWatAls()">
+                <span class="slider-val" id="waPrijsVal">+0%</span>
+              </div>
+            </div>
+          </div>
+          <div id="waResult" style="margin-top:14px;padding:12px 16px;background:var(--bg-card);border-radius:8px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
+            <div><div style="font-size:11px;color:var(--text-muted);">Nieuwe winst</div><div style="font-size:18px;font-weight:700;" id="waWinst">-</div></div>
+            <div><div style="font-size:11px;color:var(--text-muted);">Nieuwe marge</div><div style="font-size:18px;font-weight:700;" id="waMarge">-</div></div>
+            <div><div style="font-size:11px;color:var(--text-muted);">Verschil</div><div style="font-size:18px;font-weight:700;" id="waVerschil">-</div></div>
+          </div>
+        </div>
+
+        <!-- EXPORT / DEEL KNOPPEN -->
+        <div style="display:flex;gap:10px;margin-top:16px;">
+          <button onclick="kopieerResultaat()" style="flex:1;padding:12px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-dim);font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;transition:all 0.2s;" id="kopieerBtn">&#128203; Kopieer resultaat</button>
+          <button onclick="deelResultaat()" style="flex:1;padding:12px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-dim);font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;transition:all 0.2s;">&#128279; Deel link</button>
+        </div>
+
         <!-- RYLEE CTA -->
         <div class="aff-cta">
           <div class="aff-icon">&#128640;</div>
@@ -572,6 +609,109 @@
     else{vd.style.background='var(--red-glow)';vd.style.borderColor='rgba(239,68,68,0.2)';vd.style.color='var(--red)';vd.innerHTML='<strong>'+(nw<0?'Verliesgevend.':'Zeer krappe marge.')+'</strong> Met '+nettoMarge.toFixed(1)+'% netto marge is dit product waarschijnlijk niet winstgevend. Heroverweeg je prijsstrategie of kies een ander product.';}
 
     const b=document.getElementById('resultBox');b.classList.add('visible');b.scrollIntoView({behavior:'smooth',block:'nearest'});
+
+    // Update counter
+    calcCount++;
+    try{localStorage.setItem('bw_calcs',calcCount);}catch(e){}
+    document.getElementById('calcCounter').textContent=calcCount.toLocaleString('nl-NL');
+
+    // Init wat-als sliders to current values
+    document.getElementById('waRetour').value=rp;
+    document.getElementById('waRetourVal').textContent=rp+'%';
+    document.getElementById('waPrijs').value=0;
+    document.getElementById('waPrijsVal').textContent='+0%';
+    lastCalc={vp,ip,p,v,pkg,verz};
+    updateWatAls();
+  }
+
+  /* ---- COUNTER ---- */
+  let calcCount=0;
+  try{calcCount=parseInt(localStorage.getItem('bw_calcs'))||0;}catch(e){}
+  document.getElementById('calcCounter').textContent=calcCount.toLocaleString('nl-NL');
+
+  /* ---- VOORBEELDDATA ---- */
+  function vulVoorbeeld(){
+    document.getElementById('category').value='12.4|0.85';
+    document.getElementById('verkoopprijs').value='29.95';
+    document.getElementById('inkoopprijs').value='8.50';
+    document.getElementById('pakketGrootte').value='pakket';
+    document.getElementById('verzendMethode').value='vvb';
+    shippingMethod='vvb';
+    document.getElementById('retourSlider').value=10;
+    document.getElementById('retourVal').textContent='10%';
+    setDest(document.querySelector('[data-dest="nl"]'));
+    updateVerzendInfo();
+    berekenWinst();
+  }
+
+  /* ---- WAT ALS SIMULATOR ---- */
+  let lastCalc=null;
+  function updateWatAls(){
+    if(!lastCalc)return;
+    const waRet=parseInt(document.getElementById('waRetour').value);
+    const waPrijsPct=parseInt(document.getElementById('waPrijs').value);
+    document.getElementById('waRetourVal').textContent=waRet+'%';
+    document.getElementById('waPrijsVal').textContent=(waPrijsPct>=0?'+':'')+waPrijsPct+'%';
+
+    const {vp:origVP,ip,p,v,pkg,verz}=lastCalc;
+    const newVP=origVP*(1+waPrijsPct/100);
+    const comm=newVP*p/100+v;
+    const ret=waRet/100*verz;
+    const tx=0.30;
+    const nw=newVP-ip-comm-verz-ret-tx;
+    const marge=nw/newVP*100;
+    const origNW=origVP-ip-(origVP*p/100+v)-verz-(parseInt(document.getElementById('retourSlider').value)/100*verz)-tx;
+    const verschil=nw-origNW;
+    const col=nw>=0?'var(--green)':'var(--red)';
+    const vCol=verschil>=0?'var(--green)':'var(--red)';
+
+    document.getElementById('waWinst').textContent='\u20AC'+nw.toFixed(2);
+    document.getElementById('waWinst').style.color=col;
+    document.getElementById('waMarge').textContent=marge.toFixed(1)+'%';
+    document.getElementById('waMarge').style.color=marge>=20?'var(--green)':marge>=10?'var(--orange)':'var(--red)';
+    document.getElementById('waVerschil').textContent=(verschil>=0?'+':'')+'\u20AC'+verschil.toFixed(2);
+    document.getElementById('waVerschil').style.color=vCol;
+  }
+
+  /* ---- KOPIEER RESULTAAT ---- */
+  function kopieerResultaat(){
+    const vp=document.getElementById('rVP').textContent;
+    const ip=document.getElementById('rIP').textContent;
+    const comm=document.getElementById('rC').textContent;
+    const verz=document.getElementById('rV').textContent;
+    const ret=document.getElementById('rR').textContent;
+    const netto=document.getElementById('rNetto').textContent;
+    const bruto=document.getElementById('rmBruto').textContent;
+    const roi=document.getElementById('rmROI').textContent;
+
+    const txt=`BolWijzer Winstberekening\n`+
+      `========================\n`+
+      `Verkoopprijs: ${vp}\n`+
+      `Inkoopprijs: ${ip}\n`+
+      `Commissie: ${comm}\n`+
+      `Verzending: ${verz}\n`+
+      `Retouren: ${ret}\n`+
+      `------------------------\n`+
+      `Netto winst: ${netto}\n`+
+      `Bruto marge: ${bruto}\n`+
+      `ROI: ${roi}\n\n`+
+      `Berekend op bolwijzer.nl`;
+
+    navigator.clipboard.writeText(txt).then(()=>{
+      const btn=document.getElementById('kopieerBtn');
+      btn.textContent='\u2705 Gekopieerd!';
+      setTimeout(()=>{btn.textContent='\uD83D\uDCCB Kopieer resultaat';},2000);
+    }).catch(()=>{alert('Kopieer mislukt. Probeer het opnieuw.');});
+  }
+
+  /* ---- DEEL LINK ---- */
+  function deelResultaat(){
+    const url='https://bolwijzer.nl/#calculator';
+    if(navigator.share){
+      navigator.share({title:'BolWijzer Winstcalculator',text:'Bereken gratis je winst op bol.com',url:url});
+    }else{
+      navigator.clipboard.writeText(url).then(()=>{alert('Link gekopieerd naar klembord!');});
+    }
   }
 
   /* ---- COMMISSIE FINDER ---- */
