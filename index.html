@@ -3,164 +3,280 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BolWijzer - Gratis Tools & Gidsen voor Bol.com Verkopers [2026]</title>
-  <meta name="description" content="Bereken gratis je winst op bol.com, vergelijk verkoper-tools en leer de beste strategieen. De #1 toolkit voor slimme bol.com verkopers.">
+  <title>Gratis Bol.com Winstcalculator 2026 - Bereken Je Marge | BolWijzer</title>
+  <meta name="description" content="Bereken gratis en direct je winst per product op bol.com. Inclusief commissie per categorie, verzendkosten (VVB, PostNL, DHL, DPD), retouren en BTW. De meest complete bol.com marge calculator van Nederland.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://bolwijzer.nl/">
-  <meta property="og:title" content="BolWijzer - Gratis Tools & Gidsen voor Bol.com Verkopers">
-  <meta property="og:description" content="Bereken gratis je winst op bol.com, vergelijk verkoper-tools en leer de beste strategieen.">
+  <meta property="og:title" content="Gratis Bol.com Winstcalculator 2026 - Bereken Je Marge">
+  <meta property="og:description" content="Bereken gratis en direct je winst per product op bol.com. Inclusief commissie, verzendkosten, retouren en BTW.">
   <meta property="og:url" content="https://bolwijzer.nl/">
   <meta property="og:image" content="https://bolwijzer.nl/og-image.png">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="nl_NL">
   <meta property="og:site_name" content="BolWijzer">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230052FF'/><text x='16' y='22' text-anchor='middle' font-size='18' font-weight='bold' fill='white'>B</text></svg>">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"BolWijzer","url":"https://bolwijzer.nl","description":"Gratis tools en gidsen voor bol.com verkopers"}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"BolWijzer Winstcalculator","url":"https://bolwijzer.nl/#calculator","description":"Gratis bol.com winstcalculator inclusief commissie, verzendkosten, retouren en BTW","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"BolWijzer","url":"https://bolwijzer.nl","description":"Gratis bol.com winstcalculator en tools voor verkopers"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"BolWijzer Winstcalculator","url":"https://bolwijzer.nl/#calculator","description":"Gratis bol.com winstcalculator 2026. Bereken je netto winst inclusief commissie, verzendkosten, retouren en BTW per productcategorie.","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Hoe werkt de BolWijzer winstcalculator?","acceptedAnswer":{"@type":"Answer","text":"Vul je verkoopprijs, inkoopprijs en productcategorie in. De calculator berekent automatisch de bol.com commissie, verzendkosten en retourkosten. Je ziet direct je netto winst, bruto marge en ROI per verkoop."}},{"@type":"Question","name":"Is de calculator echt gratis?","acceptedAnswer":{"@type":"Answer","text":"Ja, 100% gratis. Geen account nodig, geen registratie, geen verborgen kosten. De berekening draait volledig in je browser, we slaan geen data op."}},{"@type":"Question","name":"Wat is een goede marge op bol.com?","acceptedAnswer":{"@type":"Answer","text":"Een bruto marge van minimaal 30% is een gezonde richtlijn. Na aftrek van alle kosten (commissie, verzending, retouren) wil je minimaal 15-20% netto marge overhouden om winstgevend te zijn."}},{"@type":"Question","name":"Hoe hoog is de bol.com commissie?","acceptedAnswer":{"@type":"Answer","text":"De commissie verschilt per productcategorie. Het varieert van 4,1% (elektrisch gereedschap) tot 20,7% (sieraden). De meeste categorieen zitten rond de 12,4%. Daarbovenop betaal je een vast bedrag per verkoop van meestal 0,85 euro."}}]}</script>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* EXTRA STYLES FOR REDESIGN */
+    .hero-calc { max-width: var(--max-w); margin: 0 auto; padding: 48px 24px 0; position: relative; }
+    .hero-calc-header { text-align: center; margin-bottom: 36px; position: relative; }
+    .hero-calc-header .trust-badges { display: flex; justify-content: center; gap: 24px; margin-top: 20px; flex-wrap: wrap; }
+    .trust-badge { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-dim); }
+    .trust-badge svg { width: 16px; height: 16px; stroke: var(--green); fill: none; stroke-width: 2; }
+
+    /* ENHANCED RESULTS */
+    .result-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 20px; }
+    .result-metric { text-align: center; padding: 16px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+    .result-metric-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .result-metric-val { font-family: var(--font-display); font-weight: 800; font-size: 24px; }
+
+    /* TIPS SECTION */
+    .tips-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+    .tip-card { padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); }
+    .tip-card .tip-icon { font-size: 24px; margin-bottom: 10px; }
+    .tip-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+    .tip-card p { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+
+    /* FAQ ACCORDION */
+    .faq-list { max-width: 720px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 0; background: none; border: none; color: var(--text); font-size: 15px; font-weight: 500; font-family: var(--font-body); cursor: pointer; text-align: left; gap: 16px; }
+    .faq-q:hover { color: var(--blue-soft); }
+    .faq-q .faq-arrow { font-size: 18px; color: var(--text-muted); transition: transform 0.3s; flex-shrink: 0; }
+    .faq-item.open .faq-arrow { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq-a-inner { padding: 0 0 20px; font-size: 14px; color: var(--text-dim); line-height: 1.7; }
+
+    /* DISCLAIMER */
+    .disclaimer-box { max-width: 720px; margin: 0 auto; padding: 20px 24px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+    .disclaimer-box strong { color: var(--text-dim); }
+
+    /* HOW IT WORKS */
+    .steps-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; text-align: center; }
+    .step-item { padding: 24px 16px; }
+    .step-num { width: 36px; height: 36px; background: var(--blue-glow); color: var(--blue-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; margin: 0 auto 12px; }
+    .step-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+    .step-item p { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+
+    @media (max-width: 768px) {
+      .result-metrics { grid-template-columns: 1fr; }
+      .tips-grid { grid-template-columns: 1fr; }
+      .steps-row { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .steps-row { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- ============ 1. NAV ============ -->
   <nav class="nav">
     <div class="nav-inner">
       <a href="/" class="logo"><span class="logo-bol">Bol</span><span class="logo-wijzer">Wijzer</span><span class="logo-dot">.</span></a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#calculator" class="active">Tools</a></li>
-        <li><a href="artikelen/boloo-review.html">Reviews</a></li>
-        <li><a href="artikelen/boloo-vs-rylee.html">Vergelijkingen</a></li>
-        <li><a href="artikelen/verkopen-op-bol-com.html">Gidsen</a></li>
+        <li><a href="#calculator" class="active">Winstcalculator</a></li>
+        <li><a href="#tools">Meer Tools</a></li>
+        <li><a href="#artikelen">Gidsen</a></li>
+        <li><a href="#faq">FAQ</a></li>
       </ul>
       <button class="nav-mobile-btn" aria-label="Menu" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">&#9776;</button>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero" style="position:relative;text-align:center;padding:80px 24px 64px;overflow:hidden;">
+  <!-- ============ 2. HERO + CALCULATOR (boven de vouw) ============ -->
+  <section class="hero-calc" id="calculator">
     <div style="position:absolute;top:-300px;left:50%;transform:translateX(-50%);width:900px;height:700px;background:radial-gradient(ellipse at center,var(--blue-glow) 0%,transparent 65%);pointer-events:none;animation:glowPulse 6s ease-in-out infinite;"></div>
-    <div class="anim-up" style="display:inline-flex;align-items:center;gap:8px;padding:7px 18px;background:var(--blue-glow);border:1px solid rgba(0,82,255,0.2);border-radius:100px;font-size:13px;font-weight:500;color:var(--blue-soft);margin-bottom:28px;position:relative;">&#9889; Gratis tools voor bol.com verkopers</div>
-    <h1 class="anim-up-d1" style="font-family:var(--font-display);font-weight:900;font-size:clamp(36px,6vw,56px);line-height:1.08;letter-spacing:-2px;max-width:680px;margin:0 auto 20px;position:relative;">Verkoop <span style="color:var(--blue-soft)">slimmer</span> op bol.com<span style="color:var(--orange)">.</span></h1>
-    <p class="anim-up-d2" style="color:var(--text-dim);font-size:17px;max-width:500px;margin:0 auto 36px;line-height:1.7;position:relative;">Bereken je winst, vergelijk de beste tools en ontdek bewezen strategieen. Alles wat je nodig hebt als bol.com verkoper, op een plek.</p>
-    <a href="#calculator" class="anim-up-d3" style="display:inline-flex;align-items:center;gap:10px;padding:15px 30px;background:var(--blue);color:#fff;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:600;font-family:var(--font-body);cursor:pointer;transition:all 0.25s;position:relative;text-decoration:none;">Bereken je winst <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    <div class="anim-up-d4" style="display:flex;justify-content:center;gap:56px;margin-top:56px;padding-top:40px;border-top:1px solid var(--border);position:relative;">
-      <div><div class="stat-num">6+</div><div class="stat-label">Gratis tools</div></div>
-      <div><div class="stat-num">15+</div><div class="stat-label">Diepgaande gidsen</div></div>
-      <div><div class="stat-num">8</div><div class="stat-label">Tool reviews</div></div>
-    </div>
-  </section>
 
-  <!-- TOOLKIT -->
-  <section style="max-width:var(--max-w);margin:0 auto;padding:0 24px 64px;" id="calculator">
-    <div style="text-align:center;margin-bottom:32px;">
-      <h2 style="font-family:var(--font-display);font-weight:800;font-size:30px;letter-spacing:-0.5px;margin-bottom:6px;">Bol.com Verkoper Toolkit</h2>
-      <p style="color:var(--text-dim);font-size:15px;">Gratis tools om slimmere beslissingen te nemen</p>
+    <div class="hero-calc-header anim-up">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:var(--green-glow);border:1px solid rgba(16,185,129,0.2);border-radius:100px;font-size:12px;font-weight:600;color:var(--green);margin-bottom:20px;text-transform:uppercase;letter-spacing:0.5px;">100% gratis - geen account nodig</div>
+      <h1 style="font-family:var(--font-display);font-weight:900;font-size:clamp(30px,5vw,48px);line-height:1.12;letter-spacing:-1.5px;max-width:700px;margin:0 auto 14px;">Bol.com Winstcalculator <span style="color:var(--blue-soft)">2026</span></h1>
+      <p style="color:var(--text-dim);font-size:16px;max-width:560px;margin:0 auto;line-height:1.7;">Bereken direct wat je overhoudt per verkoop op bol.com. Inclusief de juiste commissie per categorie, echte verzendtarieven en retourkosten.</p>
+      <div class="trust-badges">
+        <span class="trust-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Actuele tarieven 2026</span>
+        <span class="trust-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 27+ categorieen</span>
+        <span class="trust-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 4 vervoerders</span>
+        <span class="trust-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Draait lokaal in je browser</span>
+      </div>
     </div>
-    <div class="tabs">
-      <button class="tab active" data-tab="calc" onclick="switchTab('calc')">&#128176; Winstcalculator</button>
-      <button class="tab" data-tab="comm" onclick="switchTab('comm')">&#128202; Commissie Finder</button>
-      <button class="tab" data-tab="koop" onclick="switchTab('koop')">&#127942; Koopblok Check</button>
-    </div>
-    <div class="card">
-      <!-- WINSTCALCULATOR -->
-      <div id="tab-calc">
-        <div class="form-grid">
-          <div class="form-group full">
-            <label class="form-label" for="category">Productcategorie</label>
-            <select class="form-select" id="category">
-              <option value="">Selecteer categorie...</option>
-              <option value="4.1|0.85">Elektrisch Gereedschap (4.1% + &euro;0,85)</option>
-              <option value="6|0.85">Dierenvoer (6% + &euro;0,85)</option>
-              <option value="8|2.48">Computer Hardware (8% + &euro;2,48)</option>
-              <option value="8|2.48">Televisies &amp; Witgoed (8% + &euro;2,48)</option>
-              <option value="8|2.48">Mobiele Telefoons (8% + &euro;2,48)</option>
-              <option value="10.8|0.85">Kampeerartikelen (10.8% + &euro;0,85)</option>
-              <option value="12.4|0.85">Tuin &amp; Klussen (12.4% + &euro;0,85)</option>
-              <option value="12.4|0.85">Sport &amp; Vrije Tijd (12.4% + &euro;0,85)</option>
-              <option value="12.4|0.85">Speelgoed (12.4% + &euro;0,85)</option>
-              <option value="12.4|0.85">Wonen &amp; Slapen (12.4% + &euro;0,85)</option>
-              <option value="12.4|0.85">Baby &amp; Kind (12.4% + &euro;0,85)</option>
-              <option value="12.4|0.85">Koken, Tafelen &amp; Huishouden (12.4% + &euro;0,85)</option>
-              <option value="12.4|0.85">Dier &amp; Dierbenodigdheden (12.4% + &euro;0,85)</option>
-              <option value="12.4|0.85">Kantoor &amp; Schoolbenodigdheden (12.4% + &euro;0,85)</option>
-              <option value="12.4|0.85">Eten &amp; Drinken (12.4% + &euro;0,85)</option>
-              <option value="12.4|0.85">Klein Huishoudelijk (12.4% + &euro;0,85)</option>
-              <option value="13|0.85">Kleding &amp; Mode (13% + &euro;0,85)</option>
-              <option value="13|0.85">Schoenen (13% + &euro;0,85)</option>
-              <option value="13|0.85">Tassen &amp; Koffers (13% + &euro;0,85)</option>
-              <option value="14.1|0.85">Beddengoed (14.1% + &euro;0,85)</option>
-              <option value="15|0.85">Gezondheid &amp; Persoonlijke Verzorging (15% + &euro;0,85)</option>
-              <option value="15|0">Boeken (15% + mediatoeslag &euro;1,00)</option>
-              <option value="15|0">Film, Muziek &amp; Games (15% + mediatoeslag &euro;1,00)</option>
-              <option value="20.7|0.85">Sieraden (20.7% + &euro;0,85)</option>
-              <option value="12.4|0.85">Horloges (12.4% + &euro;0,85)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="verkoopprijs">Verkoopprijs (incl. BTW)</label>
-            <input class="form-input" type="number" id="verkoopprijs" placeholder="Bijv. 29.95" step="0.01" min="0">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="inkoopprijs">Inkoopprijs (excl. BTW)</label>
-            <input class="form-input" type="number" id="inkoopprijs" placeholder="Bijv. 8.50" step="0.01" min="0">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Pakketgrootte</label>
-            <select class="form-select" id="pakketGrootte">
-              <option value="brievenbus">Brievenbuspakket (max 38x26,5x3,2 cm)</option>
-              <option value="pakket" selected>Standaard pakket tot 10 kg</option>
-              <option value="groot">Groot pakket tot 23 kg</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Verzendmethode</label>
-            <select class="form-select" id="verzendMethode" onchange="shippingMethod=this.value;updateVerzendInfo();">
-              <option value="vvb">Verzenden via Bol (VVB)</option>
-              <option value="postnl">Eigen: PostNL</option>
-              <option value="dhl">Eigen: DHL eCommerce</option>
-              <option value="dpd">Eigen: DPD</option>
-            </select>
-          </div>
-          <div class="form-group full" id="verzendInfo" style="margin-top:-8px;">
-            <div style="font-size:12px;color:var(--text-muted);padding:8px 12px;background:rgba(255,255,255,0.02);border-radius:8px;" id="verzendDetail">VVB Standaard pakket NL: &euro;5,07 excl. BTW</div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Bestemming</label>
-            <div class="radio-group">
-              <button class="radio-btn active" data-dest="nl" onclick="setDest(this)">Nederland</button>
-              <button class="radio-btn" data-dest="be" onclick="setDest(this)">Belgie</button>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Verwacht retourpercentage</label>
-            <div class="slider-row">
-              <input class="slider" type="range" id="retourSlider" min="0" max="40" value="10" oninput="document.getElementById('retourVal').textContent=this.value+'%'">
-              <span class="slider-val" id="retourVal">10%</span>
-            </div>
+
+    <!-- CALCULATOR CARD -->
+    <div class="card anim-up-d1" style="max-width:720px;margin:0 auto;">
+      <div class="form-grid">
+        <div class="form-group full">
+          <label class="form-label" for="category">Productcategorie <span style="color:var(--text-muted);font-weight:400;">- bepalend voor je commissie</span></label>
+          <select class="form-select" id="category">
+            <option value="">Selecteer je categorie...</option>
+            <option value="4.1|0.85">Elektrisch Gereedschap (4.1% + &euro;0,85)</option>
+            <option value="6|0.85">Dierenvoer (6% + &euro;0,85)</option>
+            <option value="8|2.48">Computer Hardware (8% + &euro;2,48)</option>
+            <option value="8|2.48">Televisies &amp; Witgoed (8% + &euro;2,48)</option>
+            <option value="8|2.48">Mobiele Telefoons (8% + &euro;2,48)</option>
+            <option value="10.8|0.85">Kampeerartikelen (10.8% + &euro;0,85)</option>
+            <option value="12.4|0.85">Tuin &amp; Klussen (12.4% + &euro;0,85)</option>
+            <option value="12.4|0.85">Sport &amp; Vrije Tijd (12.4% + &euro;0,85)</option>
+            <option value="12.4|0.85">Speelgoed (12.4% + &euro;0,85)</option>
+            <option value="12.4|0.85">Wonen &amp; Slapen (12.4% + &euro;0,85)</option>
+            <option value="12.4|0.85">Baby &amp; Kind (12.4% + &euro;0,85)</option>
+            <option value="12.4|0.85">Koken, Tafelen &amp; Huishouden (12.4% + &euro;0,85)</option>
+            <option value="12.4|0.85">Dier &amp; Dierbenodigdheden (12.4% + &euro;0,85)</option>
+            <option value="12.4|0.85">Kantoor &amp; Schoolbenodigdheden (12.4% + &euro;0,85)</option>
+            <option value="12.4|0.85">Eten &amp; Drinken (12.4% + &euro;0,85)</option>
+            <option value="12.4|0.85">Klein Huishoudelijk (12.4% + &euro;0,85)</option>
+            <option value="13|0.85">Kleding &amp; Mode (13% + &euro;0,85)</option>
+            <option value="13|0.85">Schoenen (13% + &euro;0,85)</option>
+            <option value="13|0.85">Tassen &amp; Koffers (13% + &euro;0,85)</option>
+            <option value="14.1|0.85">Beddengoed (14.1% + &euro;0,85)</option>
+            <option value="15|0.85">Gezondheid &amp; Persoonlijke Verzorging (15% + &euro;0,85)</option>
+            <option value="15|0">Boeken (15% + mediatoeslag &euro;1,00)</option>
+            <option value="15|0">Film, Muziek &amp; Games (15% + mediatoeslag &euro;1,00)</option>
+            <option value="20.7|0.85">Sieraden (20.7% + &euro;0,85)</option>
+            <option value="12.4|0.85">Horloges (12.4% + &euro;0,85)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="verkoopprijs">Verkoopprijs <span style="color:var(--text-muted);font-weight:400;">incl. BTW</span></label>
+          <input class="form-input" type="number" id="verkoopprijs" placeholder="&euro; 29.95" step="0.01" min="0">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inkoopprijs">Inkoopprijs <span style="color:var(--text-muted);font-weight:400;">excl. BTW</span></label>
+          <input class="form-input" type="number" id="inkoopprijs" placeholder="&euro; 8.50" step="0.01" min="0">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Pakketgrootte</label>
+          <select class="form-select" id="pakketGrootte">
+            <option value="brievenbus">Brievenbuspakket (max 38x26,5x3,2 cm)</option>
+            <option value="pakket" selected>Standaard pakket tot 10 kg</option>
+            <option value="groot">Groot pakket tot 23 kg</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Verzendmethode</label>
+          <select class="form-select" id="verzendMethode" onchange="shippingMethod=this.value;updateVerzendInfo();">
+            <option value="vvb">Verzenden via Bol (VVB)</option>
+            <option value="postnl">Eigen: PostNL</option>
+            <option value="dhl">Eigen: DHL eCommerce</option>
+            <option value="dpd">Eigen: DPD</option>
+          </select>
+        </div>
+        <div class="form-group full" style="margin-top:-8px;">
+          <div style="font-size:12px;color:var(--text-muted);padding:8px 12px;background:rgba(255,255,255,0.02);border-radius:8px;" id="verzendDetail">VVB Standaard pakket NL: &euro;5,07 excl. BTW</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Bestemming</label>
+          <div class="radio-group">
+            <button class="radio-btn active" data-dest="nl" onclick="setDest(this)">Nederland</button>
+            <button class="radio-btn" data-dest="be" onclick="setDest(this)">Belgie</button>
           </div>
         </div>
-        <button class="calc-btn" onclick="berekenWinst()">Bereken mijn winst</button>
-        <div class="result" id="resultBox">
-          <div class="result-top">
-            <div><div class="result-label">Netto winst per verkoop</div><div class="result-profit" id="resultProfit"></div></div>
-            <div class="result-badge" id="resultMarge"></div>
-          </div>
-          <div class="result-rows">
-            <div class="result-row"><span class="result-row-label">Verkoopprijs</span><span class="result-row-val" id="rVP"></span></div>
-            <div class="result-row"><span class="result-row-label">Inkoopprijs</span><span class="result-row-val neg" id="rIP"></span></div>
-            <div class="result-row"><span class="result-row-label" id="rCL">Bol.com commissie</span><span class="result-row-val neg" id="rC"></span></div>
-            <div class="result-row"><span class="result-row-label" id="rVL">Verzendkosten</span><span class="result-row-val neg" id="rV"></span></div>
-            <div class="result-row"><span class="result-row-label" id="rRL">Retourkosten</span><span class="result-row-val neg" id="rR"></span></div>
-          </div>
-          <div class="aff-cta">
-            <div class="aff-icon">&#128640;</div>
-            <div class="aff-text"><strong>Wil je dit automatisch voor al je producten?</strong><span>Rylee berekent je marge realtime voor je hele assortiment, inclusief repricer.</span></div>
-            <a class="aff-btn" href="https://rylee.nl/nl?via=riley33" target="_blank" rel="noopener">Probeer Rylee gratis &#8594;</a>
+        <div class="form-group">
+          <label class="form-label">Verwacht retourpercentage</label>
+          <div class="slider-row">
+            <input class="slider" type="range" id="retourSlider" min="0" max="40" value="10" oninput="document.getElementById('retourVal').textContent=this.value+'%'">
+            <span class="slider-val" id="retourVal">10%</span>
           </div>
         </div>
       </div>
+      <button class="calc-btn" onclick="berekenWinst()">Bereken mijn winst</button>
 
+      <!-- ENHANCED RESULTS -->
+      <div class="result" id="resultBox">
+        <!-- KEY METRICS -->
+        <div class="result-metrics">
+          <div class="result-metric">
+            <div class="result-metric-label">Netto winst</div>
+            <div class="result-metric-val" id="rmWinst"></div>
+          </div>
+          <div class="result-metric">
+            <div class="result-metric-label">Bruto marge</div>
+            <div class="result-metric-val" id="rmBruto"></div>
+          </div>
+          <div class="result-metric">
+            <div class="result-metric-label">ROI</div>
+            <div class="result-metric-val" id="rmROI"></div>
+          </div>
+        </div>
+        <!-- BREAKDOWN -->
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;font-weight:500;">Kostenopbouw per verkoop</div>
+        <div class="result-rows">
+          <div class="result-row"><span class="result-row-label">Verkoopprijs</span><span class="result-row-val" id="rVP"></span></div>
+          <div class="result-row"><span class="result-row-label">Inkoopprijs</span><span class="result-row-val neg" id="rIP"></span></div>
+          <div class="result-row"><span class="result-row-label" id="rCL">Bol.com commissie</span><span class="result-row-val neg" id="rC"></span></div>
+          <div class="result-row"><span class="result-row-label" id="rVL">Verzendkosten</span><span class="result-row-val neg" id="rV"></span></div>
+          <div class="result-row"><span class="result-row-label" id="rRL">Retourkosten</span><span class="result-row-val neg" id="rR"></span></div>
+          <div class="result-row" style="border-top:1px solid var(--border);padding-top:10px;margin-top:6px;">
+            <span class="result-row-label" style="color:var(--text);font-weight:600;">Netto winst</span>
+            <span class="result-row-val" style="font-weight:700;" id="rNetto"></span>
+          </div>
+        </div>
+        <!-- VERDICT -->
+        <div id="resultVerdict" style="margin-top:16px;padding:14px 18px;border-radius:var(--radius-sm);font-size:14px;line-height:1.6;"></div>
+        <!-- RYLEE CTA -->
+        <div class="aff-cta">
+          <div class="aff-icon">&#128640;</div>
+          <div class="aff-text"><strong>Wil je dit automatisch voor al je producten?</strong><span>Rylee berekent je marge realtime voor je hele assortiment, inclusief repricer.</span></div>
+          <a class="aff-btn" href="https://rylee.nl/nl?via=riley33" target="_blank" rel="noopener">Probeer Rylee gratis &#8594;</a>
+        </div>
+      </div>
+
+      <!-- DISCLAIMER UNDER CALC -->
+      <div style="margin-top:20px;font-size:11px;color:var(--text-muted);line-height:1.6;text-align:center;">
+        Deze calculator geeft een indicatie op basis van publiek beschikbare bol.com tarieven (april 2026). De werkelijke commissie kan afwijken per subcategorie. Raadpleeg altijd je eigen verkoopaccount voor exacte bedragen.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. HOE WERKT HET ============ -->
+  <section class="section">
+    <div class="section-header" style="justify-content:center;"><h2>Hoe werkt de calculator?</h2></div>
+    <div class="steps-row">
+      <div class="step-item"><div class="step-num">1</div><h4>Kies je categorie</h4><p>De commissie verschilt per productgroep op bol.com</p></div>
+      <div class="step-item"><div class="step-num">2</div><h4>Vul je prijzen in</h4><p>Verkoopprijs (incl. BTW) en inkoopprijs (excl. BTW)</p></div>
+      <div class="step-item"><div class="step-num">3</div><h4>Stel verzending in</h4><p>Kies vervoerder, pakketgrootte en bestemming</p></div>
+      <div class="step-item"><div class="step-num">4</div><h4>Zie je resultaat</h4><p>Direct je netto winst, marge en ROI per verkoop</p></div>
+    </div>
+  </section>
+
+  <!-- ============ 4. PRAKTISCHE TIPS ============ -->
+  <section class="section">
+    <div class="section-header"><h2>Tips voor een gezonde marge</h2></div>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon">&#127919;</div>
+        <h4>Richt op 30%+ bruto marge</h4>
+        <p>Na commissie, verzending en retouren wil je minimaal 15-20% netto overhouden. Begin met 30% bruto als veilige ondergrens.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">&#128230;</div>
+        <h4>Kies de juiste pakketgrootte</h4>
+        <p>Een brievenbuspakket kost de helft van een standaard pakket. Overweeg je verpakking te optimaliseren als je product net niet past.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">&#128181;</div>
+        <h4>Reken retouren mee</h4>
+        <p>Kleding: 20-30% retouren. Elektronica: 5-10%. Vergeet niet dat je per retour zowel heen- als terugzendkosten kwijt bent.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">&#128200;</div>
+        <h4>Vergeet de verborgen kosten niet</h4>
+        <p>Verpakkingsmateriaal, advertenties, LVB-opslag en je eigen tijd. De calculator toont de basiskosten, de werkelijkheid is vaak iets hoger.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. MEER TOOLS (TABS) ============ -->
+  <section class="section" id="tools">
+    <div class="section-header" style="justify-content:center;"><h2>Meer Gratis Tools</h2></div>
+    <div class="tabs" style="max-width:600px;margin:0 auto 24px;">
+      <button class="tab active" data-tab="comm" onclick="switchTab('comm')">&#128202; Commissie Finder</button>
+      <button class="tab" data-tab="koop" onclick="switchTab('koop')">&#127942; Koopblok Check</button>
+    </div>
+    <div class="card" style="max-width:720px;margin:0 auto;">
       <!-- COMMISSIE FINDER -->
-      <div id="tab-comm" style="display:none">
+      <div id="tab-comm">
         <div style="margin-bottom:20px;">
           <label class="form-label" for="commSearch">Zoek je categorie</label>
           <input class="form-input" type="text" id="commSearch" placeholder="Bijv. elektronica, sport, boeken..." oninput="filterCommissie(this.value)">
@@ -175,7 +291,6 @@
           <a class="aff-btn" href="https://rylee.nl/nl?via=riley33" target="_blank" rel="noopener">Probeer Rylee gratis &#8594;</a>
         </div>
       </div>
-
       <!-- KOOPBLOK CHECK -->
       <div id="tab-koop" style="display:none">
         <div class="form-grid">
@@ -207,21 +322,15 @@
         <div class="result" id="kbResult">
           <div style="text-align:center;">
             <div class="score-ring">
-              <svg viewBox="0 0 180 180">
-                <circle class="ring-bg" cx="90" cy="90" r="75"/>
-                <circle class="ring-fill" id="kbRingFill" cx="90" cy="90" r="75" stroke-dasharray="471" stroke-dashoffset="471"/>
-              </svg>
-              <div class="score-text">
-                <div class="score-num" id="kbScoreNum">0%</div>
-                <div class="score-label">koopblok kans</div>
-              </div>
+              <svg viewBox="0 0 180 180"><circle class="ring-bg" cx="90" cy="90" r="75"/><circle class="ring-fill" id="kbRingFill" cx="90" cy="90" r="75" stroke-dasharray="471" stroke-dashoffset="471"/></svg>
+              <div class="score-text"><div class="score-num" id="kbScoreNum">0%</div><div class="score-label">koopblok kans</div></div>
             </div>
             <p id="kbVerdict" style="font-size:15px;color:var(--text-dim);max-width:400px;margin:0 auto;"></p>
           </div>
           <div class="score-factors" id="kbFactors"></div>
           <div class="aff-cta" style="margin-top:24px;">
             <div class="aff-icon">&#127942;</div>
-            <div class="aff-text"><strong>Automatisch het koopblok winnen?</strong><span>Met de Rylee Repricer past je prijs zich realtime aan om het koopblok te pakken.</span></div>
+            <div class="aff-text"><strong>Automatisch het koopblok winnen?</strong><span>Met de Rylee Repricer past je prijs zich realtime aan.</span></div>
             <a class="aff-btn" href="https://rylee.nl/nl?via=riley33" target="_blank" rel="noopener">Probeer Rylee gratis &#8594;</a>
           </div>
         </div>
@@ -229,7 +338,7 @@
     </div>
   </section>
 
-  <!-- TOOLS -->
+  <!-- ============ 6. TOOL VERGELIJKING ============ -->
   <section class="section" id="vergelijk">
     <div class="section-header"><h2>Populaire Bol.com Tools</h2><a href="artikelen/boloo-vs-rylee.html">Alle tools vergelijken &#8594;</a></div>
     <div class="compare-grid">
@@ -254,42 +363,101 @@
     </div>
   </section>
 
-  <!-- ARTICLES -->
+  <!-- ============ 7. ARTIKELEN ============ -->
   <section class="section" id="artikelen">
-    <div class="section-header"><h2>Laatste Artikelen</h2><a href="#">Alle artikelen &#8594;</a></div>
+    <div class="section-header"><h2>Gidsen &amp; Reviews</h2></div>
     <div class="articles-grid">
       <a class="article-card" href="artikelen/boloo-vs-rylee.html">
         <span class="article-tag tag-compare">Vergelijking</span>
         <h3>Boloo vs Rylee: welke tool past bij jou?</h3>
-        <p>Een eerlijke vergelijking van de twee grootste bol.com tools op functies, prijs en gebruiksgemak.</p>
+        <p>Een eerlijke vergelijking op functies, prijs en gebruiksgemak.</p>
         <div class="read-time">8 min leestijd</div>
       </a>
       <a class="article-card" href="artikelen/verkopen-op-bol-com.html">
         <span class="article-tag tag-guide">Gids</span>
         <h3>Verkopen op bol.com: het complete stappenplan [2026]</h3>
-        <p>Van KvK-registratie tot je eerste verkoop. Alles wat je moet weten om te starten als bol.com verkoper.</p>
+        <p>Van KvK-registratie tot je eerste verkoop.</p>
         <div class="read-time">12 min leestijd</div>
       </a>
       <a class="article-card" href="artikelen/koopblok-winnen.html">
         <span class="article-tag tag-tips">Tips</span>
         <h3>Koopblok winnen: 7 strategieen die echt werken</h3>
-        <p>Het koopblok bepaalt 90% van je verkopen. Zo vergroot je je kans om hem te winnen.</p>
+        <p>Het koopblok bepaalt 90% van je verkopen.</p>
         <div class="read-time">6 min leestijd</div>
       </a>
       <a class="article-card" href="artikelen/boloo-review.html">
         <span class="article-tag tag-review">Review</span>
         <h3>Boloo Review: ervaringen, kosten en alternatieven</h3>
-        <p>Een eerlijk overzicht van Boloo's tools, cursussen en community voor bol.com verkopers.</p>
+        <p>Eerlijk overzicht van Boloo's tools en community.</p>
         <div class="read-time">10 min leestijd</div>
       </a>
     </div>
   </section>
 
-  <!-- NEWSLETTER -->
+  <!-- ============ 8. FAQ ============ -->
+  <section class="section" id="faq">
+    <div class="section-header" style="justify-content:center;"><h2>Veelgestelde vragen</h2></div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Hoe werkt de BolWijzer winstcalculator?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Je vult je verkoopprijs (incl. BTW), inkoopprijs (excl. BTW) en productcategorie in. De calculator pakt automatisch het juiste commissiepercentage en vaste bedrag voor die categorie. Vervolgens kies je je verzendmethode, pakketgrootte en bestemming. De berekening toont je netto winst, bruto marge en ROI per verkoop. Alles draait in je browser, er wordt niks opgeslagen.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is deze tool echt 100% gratis?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Ja, volledig gratis. Geen account, geen registratie, geen verborgen kosten. De site wordt gefinancierd via affiliate links naar tools zoals Rylee. Jij betaalt daar nooit extra voor.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Hoe betrouwbaar zijn de commissiepercentages?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">We gebruiken de officieel gepubliceerde tarieven van het bol.com Partnerplatform (laatst bijgewerkt: april 2026). Bol.com kan binnen subcategorieen afwijkende percentages hanteren. Controleer altijd het exacte bedrag in je eigen verkoopaccount bij 'Artikelen' voor de definitieve commissie.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Wat is een goede marge op bol.com?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Als vuistregel: richt op minimaal <strong>30% bruto marge</strong> (verkoopprijs minus inkoopprijs minus commissie). Na aftrek van verzending, retouren en overige kosten wil je minimaal <strong>15-20% netto marge</strong> overhouden. Producten onder de 15% netto zijn risicovol, vooral in categorieen met hoge retouren.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Wat is een realistisch retourpercentage?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Dit verschilt sterk per categorie. Richtlijnen: <strong>Kleding &amp; Mode: 20-30%</strong>, Schoenen: 15-25%, Elektronica: 5-10%, Speelgoed: 3-8%, Boeken: 1-3%. De calculator laat je zelf het percentage instellen zodat je kunt zien hoe het je winst beinvloedt.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Wat is het verschil tussen bruto marge en netto winst?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><strong>Bruto marge</strong> = (verkoopprijs - inkoopprijs - commissie) / verkoopprijs. Dit is je marge voordat je verzending en retouren aftrekt. <strong>Netto winst</strong> = wat er overblijft na alle kosten (commissie + vast bedrag + transactiekosten + verzending + retourkosten). De netto winst is wat je daadwerkelijk overhoudt per verkoop.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Hoe zit het met BTW bij inkoop en verkoop?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Je verkoopprijs op bol.com is altijd inclusief BTW (21%). Je inkoopprijs is meestal exclusief BTW als je bij een leverancier koopt. De BTW die je ontvangt van klanten draag je af aan de Belastingdienst, minus de BTW die je zelf hebt betaald op inkoop. De calculator vraagt daarom om je verkoopprijs incl. BTW en inkoopprijs excl. BTW.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Kan ik de calculator voor meerdere producten tegelijk gebruiken?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">De calculator berekent nu per product. Voor het doorrekenen van je hele assortiment in bulk heb je een tool zoals <a href="https://rylee.nl/nl?via=riley33" target="_blank" rel="noopener" style="color:var(--blue-soft)">Rylee</a> nodig die direct koppelt met je bol.com verkoopaccount en alle marges realtime berekent.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Zijn LVB-kosten, advertenties en verpakking meegenomen?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">De calculator bevat de belangrijkste kostenposten: commissie, transactiekosten, verzendkosten en retourkosten. <strong>Niet meegenomen</strong> zijn: LVB-opslagkosten, bol.com advertentiekosten (Sponsored Products), verpakkingsmateriaal, en je eigen tijd/overhead. In de praktijk liggen je werkelijke kosten dus iets hoger dan het resultaat.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Hoe vaak worden de tarieven bijgewerkt?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">We controleren de bol.com commissietarieven en verzendtarieven bij elke grote tariefwijziging van bol.com of de vervoerders. De huidige tarieven zijn gebaseerd op de tarieven per april 2026. Bij significante wijzigingen updaten we de calculator zo snel mogelijk.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Waarom is mijn werkelijke commissie anders dan de calculator toont?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Bol.com hanteert soms afwijkende percentages per subcategorie of prijsklasse. Ook zijn er tijdelijke verlaagde commissies voor geselecteerde artikelen. De calculator gebruikt de hoofdcategorie-tarieven. Controleer je exacte commissie altijd in je verkoopaccount onder 'Artikelen'.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9. DISCLAIMER ============ -->
+  <section class="section" style="padding-top:0;">
+    <div class="disclaimer-box">
+      <strong>Disclaimer</strong><br>
+      De BolWijzer winstcalculator is een hulpmiddel dat een indicatie geeft van je mogelijke winst per product op bol.com. De berekeningen zijn gebaseerd op publiek beschikbare tarieven van bol.com, PostNL, DHL en DPD (stand april 2026). Werkelijke commissies, verzendtarieven en kosten kunnen afwijken afhankelijk van je specifieke situatie, subcategorie, volume-afspraken met vervoerders, en eventuele wijzigingen door bol.com. BolWijzer is niet gelieerd aan bol.com en geeft geen financieel advies. Raadpleeg altijd je eigen verkoopaccount en boekhouder voor definitieve berekeningen. Sommige links op deze site zijn affiliate links waarvoor wij een commissie ontvangen, zonder extra kosten voor jou.
+    </div>
+  </section>
+
+  <!-- ============ 10. NEWSLETTER ============ -->
   <section class="newsletter">
     <div class="newsletter-card">
       <h2>Blijf op de hoogte</h2>
-      <p>Ontvang nieuwe tool reviews, bol.com tips en updates direct in je inbox.</p>
+      <p>Ontvang nieuwe tool reviews, bol.com tips en tariefwijzigingen direct in je inbox.</p>
       <div class="newsletter-form">
         <input type="email" placeholder="jouw@email.nl" aria-label="E-mailadres">
         <button type="button">Aanmelden</button>
@@ -297,16 +465,16 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ============ 11. FOOTER ============ -->
   <div class="footer-wrap">
     <footer class="footer">
       <div class="footer-brand">
         <div class="logo"><span class="logo-bol">Bol</span><span class="logo-wijzer">Wijzer</span><span class="logo-dot">.</span></div>
         <p>De gratis toolkit en kennisbank voor slimme bol.com verkopers in Nederland en Belgie.</p>
       </div>
-      <div class="footer-col"><h4>Tools</h4><a href="#calculator">Winstcalculator</a><a href="#calculator">Commissie Finder</a><a href="#calculator">Koopblok Check</a></div>
+      <div class="footer-col"><h4>Tools</h4><a href="#calculator">Winstcalculator</a><a href="#tools">Commissie Finder</a><a href="#tools">Koopblok Check</a></div>
       <div class="footer-col"><h4>Reviews</h4><a href="artikelen/boloo-review.html">Boloo Review</a><a href="artikelen/boloo-vs-rylee.html">Boloo vs Rylee</a></div>
-      <div class="footer-col"><h4>Gidsen</h4><a href="artikelen/verkopen-op-bol-com.html">Starten op bol.com</a><a href="artikelen/koopblok-winnen.html">Koopblok winnen</a><a href="#">Listing optimalisatie</a></div>
+      <div class="footer-col"><h4>Gidsen</h4><a href="artikelen/verkopen-op-bol-com.html">Starten op bol.com</a><a href="artikelen/koopblok-winnen.html">Koopblok winnen</a></div>
     </footer>
     <div class="footer-bottom">BolWijzer.nl is niet gelieerd aan bol.com. Alle product- en merknamen zijn eigendom van hun respectievelijke eigenaren. Sommige links op deze site zijn affiliate links. &copy; 2026 BolWijzer.nl</div>
   </div>
@@ -315,103 +483,93 @@
   /* ---- STATE ---- */
   let shippingMethod='vvb', levertijd=1, bestemming='nl';
 
-  /* Verzendkosten tabel (excl. BTW tenzij anders vermeld)
-     VVB: bol.com partnerplatform tarieven 2025/2026
-     PostNL: postnl.nl zakelijke tarieven 2026 (excl. BTW)
-     DHL: dhlecommerce.nl tarieven 2026 (excl. BTW)
-     DPD: dpd.nl tarieven 2026 (excl. BTW) */
   const verzendTarieven = {
-    vvb: {
-      brievenbus: { nl: 3.27, be: 5.38 },
-      pakket:     { nl: 5.07, be: 5.38 },
-      groot:      { nl: 5.07, be: 5.38 }
-    },
-    postnl: {
-      brievenbus: { nl: 3.43, be: 5.74 },
-      pakket:     { nl: 5.74, be: 8.26 },
-      groot:      { nl: 10.91, be: 14.05 }
-    },
-    dhl: {
-      brievenbus: { nl: 3.18, be: 5.50 },
-      pakket:     { nl: 4.92, be: 7.85 },
-      groot:      { nl: 12.36, be: 15.25 }
-    },
-    dpd: {
-      brievenbus: { nl: 3.25, be: 5.40 },
-      pakket:     { nl: 5.17, be: 7.50 },
-      groot:      { nl: 10.50, be: 13.80 }
-    }
+    vvb:    { brievenbus:{nl:3.27,be:5.38}, pakket:{nl:5.07,be:5.38}, groot:{nl:5.07,be:5.38} },
+    postnl: { brievenbus:{nl:3.43,be:5.74}, pakket:{nl:5.74,be:8.26}, groot:{nl:10.91,be:14.05} },
+    dhl:    { brievenbus:{nl:3.18,be:5.50}, pakket:{nl:4.92,be:7.85}, groot:{nl:12.36,be:15.25} },
+    dpd:    { brievenbus:{nl:3.25,be:5.40}, pakket:{nl:5.17,be:7.50}, groot:{nl:10.50,be:13.80} }
   };
+  const pakketLabels = { brievenbus:'Brievenbuspakket', pakket:'Standaard pakket', groot:'Groot pakket' };
+  const methodeLabels = { vvb:'VVB', postnl:'PostNL', dhl:'DHL', dpd:'DPD' };
 
-  const pakketLabels = { brievenbus: 'Brievenbuspakket', pakket: 'Standaard pakket', groot: 'Groot pakket' };
-  const methodeLabels = { vvb: 'VVB', postnl: 'PostNL', dhl: 'DHL', dpd: 'DPD' };
-
-  function updateVerzendInfo() {
-    const pkg = document.getElementById('pakketGrootte').value;
-    const tarief = verzendTarieven[shippingMethod][pkg][bestemming];
-    const label = methodeLabels[shippingMethod] + ' ' + pakketLabels[pkg] + ' ' + bestemming.toUpperCase();
-    document.getElementById('verzendDetail').textContent = label + ': \u20AC' + tarief.toFixed(2) + ' excl. BTW';
+  function updateVerzendInfo(){
+    const pkg=document.getElementById('pakketGrootte').value;
+    const t=verzendTarieven[shippingMethod][pkg][bestemming];
+    document.getElementById('verzendDetail').textContent=methodeLabels[shippingMethod]+' '+pakketLabels[pkg]+' '+bestemming.toUpperCase()+': \u20AC'+t.toFixed(2)+' excl. BTW';
   }
-
-  function setShipping(b){document.querySelectorAll('[data-method]').forEach(x=>x.classList.remove('active'));b.classList.add('active');shippingMethod=b.dataset.method;updateVerzendInfo();}
   function setDest(b){document.querySelectorAll('[data-dest]').forEach(x=>x.classList.remove('active'));b.classList.add('active');bestemming=b.dataset.dest;updateVerzendInfo();}
-  document.getElementById('pakketGrootte').addEventListener('change', updateVerzendInfo);
   function setLevertijd(b){document.querySelectorAll('#tab-koop .radio-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');levertijd=parseInt(b.dataset.lt);}
+  document.getElementById('pakketGrootte').addEventListener('change',updateVerzendInfo);
 
   /* ---- TABS ---- */
   function switchTab(t){
     document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
     document.querySelector(`[data-tab="${t}"]`).classList.add('active');
-    ['calc','comm','koop'].forEach(id=>{document.getElementById('tab-'+id).style.display=id===t?'block':'none';});
+    ['comm','koop'].forEach(id=>{document.getElementById('tab-'+id).style.display=id===t?'block':'none';});
     if(t==='comm'&&!document.getElementById('commGrid').children.length)renderCommissie();
   }
 
-  /* ---- WINSTCALCULATOR ---- */
+  /* ---- WINSTCALCULATOR (enhanced) ---- */
   function berekenWinst(){
     const c=document.getElementById('category').value,vp=parseFloat(document.getElementById('verkoopprijs').value),ip=parseFloat(document.getElementById('inkoopprijs').value),rp=parseInt(document.getElementById('retourSlider').value);
-    if(!c||isNaN(vp)||isNaN(ip)||vp<=0){alert('Vul alle velden in.');return;}
-    const[p,v]=c.split('|').map(Number),pkg=document.getElementById('pakketGrootte').value,comm=vp*p/100+v,verz=verzendTarieven[shippingMethod][pkg][bestemming],ret=rp/100*verz,tx=0.30,nw=vp-ip-comm-verz-ret-tx,mg=nw/vp*100,pos=nw>=0;
-    document.getElementById('resultProfit').textContent='\u20AC'+nw.toFixed(2);
-    document.getElementById('resultProfit').className='result-profit '+(pos?'pos':'neg');
-    document.getElementById('resultMarge').textContent=mg.toFixed(1)+'% marge';
-    document.getElementById('resultMarge').className='result-badge '+(pos?'pos':'neg');
+    if(!c||isNaN(vp)||isNaN(ip)||vp<=0){alert('Vul alle velden in om je winst te berekenen.');return;}
+
+    const[p,v]=c.split('|').map(Number);
+    const pkg=document.getElementById('pakketGrootte').value;
+    const comm=vp*p/100+v;
+    const verz=verzendTarieven[shippingMethod][pkg][bestemming];
+    const ret=rp/100*verz;
+    const tx=0.30;
+    const nw=vp-ip-comm-verz-ret-tx;
+    const nettoMarge=nw/vp*100;
+    const brutoMarge=(vp-ip-comm)/vp*100;
+    const roi=ip>0?(nw/ip*100):0;
+    const pos=nw>=0;
+    const col=pos?'var(--green)':'var(--red)';
+
+    // Key metrics
+    document.getElementById('rmWinst').textContent='\u20AC'+nw.toFixed(2);
+    document.getElementById('rmWinst').style.color=col;
+    document.getElementById('rmBruto').textContent=brutoMarge.toFixed(1)+'%';
+    document.getElementById('rmBruto').style.color=brutoMarge>=30?'var(--green)':brutoMarge>=15?'var(--orange)':'var(--red)';
+    document.getElementById('rmROI').textContent=roi.toFixed(0)+'%';
+    document.getElementById('rmROI').style.color=roi>=50?'var(--green)':roi>=20?'var(--orange)':'var(--red)';
+
+    // Breakdown
     document.getElementById('rVP').textContent='\u20AC'+vp.toFixed(2);
     document.getElementById('rIP').textContent='- \u20AC'+ip.toFixed(2);
     document.getElementById('rCL').textContent='Bol.com commissie ('+p+'% + \u20AC'+v.toFixed(2)+' + \u20AC0,30)';
     document.getElementById('rC').textContent='- \u20AC'+(comm+tx).toFixed(2);
-    document.getElementById('rVL').textContent='Verzendkosten ('+methodeLabels[shippingMethod]+', '+pakketLabels[document.getElementById('pakketGrootte').value]+', '+bestemming.toUpperCase()+')';
+    document.getElementById('rVL').textContent='Verzendkosten ('+methodeLabels[shippingMethod]+', '+pakketLabels[pkg]+', '+bestemming.toUpperCase()+')';
     document.getElementById('rV').textContent='- \u20AC'+verz.toFixed(2);
     document.getElementById('rRL').textContent='Retourkosten ('+rp+'%)';
     document.getElementById('rR').textContent='- \u20AC'+ret.toFixed(2);
+    document.getElementById('rNetto').textContent=(pos?'':'')+'\u20AC'+nw.toFixed(2);
+    document.getElementById('rNetto').style.color=col;
+
+    // Verdict
+    const vd=document.getElementById('resultVerdict');
+    if(nettoMarge>=20){vd.style.background='var(--green-glow)';vd.style.borderColor='rgba(16,185,129,0.2)';vd.style.color='var(--green)';vd.innerHTML='<strong>Gezonde marge.</strong> Met '+nettoMarge.toFixed(1)+'% netto marge en een ROI van '+roi.toFixed(0)+'% ziet dit product er winstgevend uit. Let wel op advertentiekosten en verpakking die hier niet in zitten.';}
+    else if(nettoMarge>=10){vd.style.background='var(--orange-glow)';vd.style.borderColor='rgba(249,115,22,0.2)';vd.style.color='var(--orange)';vd.innerHTML='<strong>Krappe marge.</strong> Met '+nettoMarge.toFixed(1)+'% netto marge is er weinig ruimte voor tegenvallers. Overweeg je inkoopprijs te verlagen of je verkoopprijs te verhogen.';}
+    else{vd.style.background='var(--red-glow)';vd.style.borderColor='rgba(239,68,68,0.2)';vd.style.color='var(--red)';vd.innerHTML='<strong>'+(nw<0?'Verliesgevend.':'Zeer krappe marge.')+'</strong> Met '+nettoMarge.toFixed(1)+'% netto marge is dit product waarschijnlijk niet winstgevend. Heroverweeg je prijsstrategie of kies een ander product.';}
+
     const b=document.getElementById('resultBox');b.classList.add('visible');b.scrollIntoView({behavior:'smooth',block:'nearest'});
   }
 
   /* ---- COMMISSIE FINDER ---- */
   const commissies=[
-    {cat:'Elektrisch Gereedschap',pct:4.1,vast:0.85},
-    {cat:'Dierenvoer',pct:6,vast:0.85},
-    {cat:'Computer Hardware',pct:8,vast:2.48},
-    {cat:'Televisies & Witgoed',pct:8,vast:2.48},
-    {cat:'Mobiele Telefoons',pct:8,vast:2.48},
-    {cat:'Drones',pct:8,vast:2.48},
-    {cat:'Grote Meubelen',pct:8,vast:2.48},
-    {cat:'Kampeerartikelen',pct:10.8,vast:0.85},
-    {cat:'Tuin & Klussen',pct:12.4,vast:0.85},
-    {cat:'Sport & Vrije Tijd',pct:12.4,vast:0.85},
-    {cat:'Speelgoed',pct:12.4,vast:0.85},
-    {cat:'Wonen & Slapen',pct:12.4,vast:0.85},
-    {cat:'Baby & Kind',pct:12.4,vast:0.85},
-    {cat:'Koken, Tafelen & Huishouden',pct:12.4,vast:0.85},
-    {cat:'Dier & Dierbenodigdheden',pct:12.4,vast:0.85},
-    {cat:'Kantoor & Schoolbenodigdheden',pct:12.4,vast:0.85},
-    {cat:'Eten & Drinken',pct:12.4,vast:0.85},
-    {cat:'Klein Huishoudelijk',pct:12.4,vast:0.85},
-    {cat:'Horloges',pct:12.4,vast:0.85},
-    {cat:'Auto & Motor',pct:12.4,vast:0.85},
-    {cat:'Kleding & Mode',pct:13,vast:0.85},
-    {cat:'Schoenen',pct:13,vast:0.85},
-    {cat:'Tassen & Koffers',pct:13,vast:0.85},
-    {cat:'Beddengoed',pct:14.1,vast:0.85},
+    {cat:'Elektrisch Gereedschap',pct:4.1,vast:0.85},{cat:'Dierenvoer',pct:6,vast:0.85},
+    {cat:'Computer Hardware',pct:8,vast:2.48},{cat:'Televisies & Witgoed',pct:8,vast:2.48},
+    {cat:'Mobiele Telefoons',pct:8,vast:2.48},{cat:'Drones',pct:8,vast:2.48},
+    {cat:'Grote Meubelen',pct:8,vast:2.48},{cat:'Kampeerartikelen',pct:10.8,vast:0.85},
+    {cat:'Tuin & Klussen',pct:12.4,vast:0.85},{cat:'Sport & Vrije Tijd',pct:12.4,vast:0.85},
+    {cat:'Speelgoed',pct:12.4,vast:0.85},{cat:'Wonen & Slapen',pct:12.4,vast:0.85},
+    {cat:'Baby & Kind',pct:12.4,vast:0.85},{cat:'Koken, Tafelen & Huishouden',pct:12.4,vast:0.85},
+    {cat:'Dier & Dierbenodigdheden',pct:12.4,vast:0.85},{cat:'Kantoor & Schoolbenodigdheden',pct:12.4,vast:0.85},
+    {cat:'Eten & Drinken',pct:12.4,vast:0.85},{cat:'Klein Huishoudelijk',pct:12.4,vast:0.85},
+    {cat:'Horloges',pct:12.4,vast:0.85},{cat:'Auto & Motor',pct:12.4,vast:0.85},
+    {cat:'Kleding & Mode',pct:13,vast:0.85},{cat:'Schoenen',pct:13,vast:0.85},
+    {cat:'Tassen & Koffers',pct:13,vast:0.85},{cat:'Beddengoed',pct:14.1,vast:0.85},
     {cat:'Gezondheid & Persoonlijke Verzorging',pct:15,vast:0.85},
     {cat:'Boeken (+ mediatoeslag \u20AC1)',pct:15,vast:0},
     {cat:'Film, Muziek & Games (+ mediatoeslag \u20AC1)',pct:15,vast:0},
@@ -419,8 +577,7 @@
   ];
   function renderCommissie(filter=''){
     const g=document.getElementById('commGrid');g.innerHTML='';
-    const f=filter.toLowerCase();
-    commissies.filter(c=>c.cat.toLowerCase().includes(f)).forEach(c=>{
+    commissies.filter(c=>c.cat.toLowerCase().includes(filter.toLowerCase())).forEach(c=>{
       const total=(30*c.pct/100+c.vast).toFixed(2);
       g.innerHTML+=`<div class="comm-row"><span class="cat-name">${c.cat}</span><span class="cat-pct">${c.pct}%</span><span class="cat-vast">&euro;${c.vast.toFixed(2)}</span><span class="cat-total">&euro;${total}</span></div>`;
     });
@@ -431,35 +588,37 @@
   function berekenKoopblok(){
     const mp=parseFloat(document.getElementById('kbPrijs').value),cp=parseFloat(document.getElementById('kbConcurrent').value),pr=parseInt(document.getElementById('kbPrestatie').value);
     if(isNaN(mp)||isNaN(cp)||mp<=0||cp<=0){alert('Vul alle velden in.');return;}
-    const priceDiff=(cp-mp)/cp*100;
-    let priceScore=50;
-    if(priceDiff>5)priceScore=90;else if(priceDiff>0)priceScore=70;else if(priceDiff>-3)priceScore=40;else if(priceDiff>-10)priceScore=20;else priceScore=5;
-    let ltScore=levertijd===1?90:levertijd===2?55:20;
-    let prestatieScore=pr*10;
-    const total=Math.round(priceScore*0.45+ltScore*0.30+prestatieScore*0.25);
-    const circ=471;const offset=circ-circ*total/100;
-    let col=total>=70?'var(--green)':total>=40?'var(--orange)':'var(--red)';
-    document.getElementById('kbRingFill').style.strokeDashoffset=offset;
+    const pd=(cp-mp)/cp*100;
+    let ps=pd>5?90:pd>0?70:pd>-3?40:pd>-10?20:5;
+    let ls=levertijd===1?90:levertijd===2?55:20;
+    let prs=pr*10;
+    const tot=Math.round(ps*0.45+ls*0.30+prs*0.25);
+    const circ=471,off=circ-circ*tot/100;
+    let col=tot>=70?'var(--green)':tot>=40?'var(--orange)':'var(--red)';
+    document.getElementById('kbRingFill').style.strokeDashoffset=off;
     document.getElementById('kbRingFill').style.stroke=col;
-    document.getElementById('kbScoreNum').textContent=total+'%';
+    document.getElementById('kbScoreNum').textContent=tot+'%';
     document.getElementById('kbScoreNum').style.color=col;
-    let verdict='';
-    if(total>=75)verdict='Sterke positie! Je hebt een goede kans op het koopblok met deze combinatie van prijs en service.';
-    else if(total>=50)verdict='Redelijke kans. Verbeter je prijs of levertijd om je positie te versterken.';
-    else verdict='Lastige positie. Je concurrent heeft waarschijnlijk het koopblok. Overweeg je prijs te verlagen of je levertijd te verkorten.';
-    document.getElementById('kbVerdict').textContent=verdict;
-    const factors=document.getElementById('kbFactors');
-    factors.innerHTML=`
-      <div class="score-factor"><div class="score-factor-label">Prijs (45% gewicht)</div><div class="score-factor-val" style="color:${priceScore>=60?'var(--green)':priceScore>=30?'var(--orange)':'var(--red)'}">${priceScore}/100</div><div class="score-factor-bar"><div class="score-factor-fill" style="width:${priceScore}%;background:${priceScore>=60?'var(--green)':priceScore>=30?'var(--orange)':'var(--red)'}"></div></div></div>
-      <div class="score-factor"><div class="score-factor-label">Levertijd (30% gewicht)</div><div class="score-factor-val" style="color:${ltScore>=60?'var(--green)':ltScore>=30?'var(--orange)':'var(--red)'}">${ltScore}/100</div><div class="score-factor-bar"><div class="score-factor-fill" style="width:${ltScore}%;background:${ltScore>=60?'var(--green)':ltScore>=30?'var(--orange)':'var(--red)'}"></div></div></div>
-      <div class="score-factor"><div class="score-factor-label">Prestatiescore (25% gewicht)</div><div class="score-factor-val" style="color:${prestatieScore>=60?'var(--green)':prestatieScore>=30?'var(--orange)':'var(--red)'}">${prestatieScore}/100</div><div class="score-factor-bar"><div class="score-factor-fill" style="width:${prestatieScore}%;background:${prestatieScore>=60?'var(--green)':prestatieScore>=30?'var(--orange)':'var(--red)'}"></div></div></div>
-      <div class="score-factor"><div class="score-factor-label">Totaalscore</div><div class="score-factor-val" style="color:${col}">${total}/100</div><div class="score-factor-bar"><div class="score-factor-fill" style="width:${total}%;background:${col}"></div></div></div>`;
+    document.getElementById('kbVerdict').textContent=tot>=75?'Sterke positie! Je hebt een goede kans op het koopblok.':tot>=50?'Redelijke kans. Verbeter je prijs of levertijd om sterker te staan.':'Lastige positie. Overweeg je prijs te verlagen of je levertijd te verkorten.';
+    const f=document.getElementById('kbFactors');
+    f.innerHTML=[['Prijs (45%)',ps],['Levertijd (30%)',ls],['Prestatie (25%)',prs],['Totaal',tot]].map(([l,v])=>{let c2=v>=60?'var(--green)':v>=30?'var(--orange)':'var(--red)';return`<div class="score-factor"><div class="score-factor-label">${l}</div><div class="score-factor-val" style="color:${c2}">${v}/100</div><div class="score-factor-bar"><div class="score-factor-fill" style="width:${v}%;background:${c2}"></div></div></div>`;}).join('');
     const b=document.getElementById('kbResult');b.classList.add('visible');b.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+
+  /* ---- FAQ TOGGLE ---- */
+  function toggleFaq(btn){
+    const item=btn.parentElement;
+    const wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight=null;});
+    if(!wasOpen){item.classList.add('open');const a=item.querySelector('.faq-a');a.style.maxHeight=a.scrollHeight+'px';}
   }
 
   /* ---- SCROLL ANIM ---- */
   const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)';}}),{threshold:0.1});
-  document.querySelectorAll('.compare-card,.article-card,.newsletter-card').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 0.6s ease,transform 0.6s ease';obs.observe(el);});
+  document.querySelectorAll('.compare-card,.article-card,.newsletter-card,.tip-card,.step-item').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 0.6s ease,transform 0.6s ease';obs.observe(el);});
+
+  /* Init commissie on first tab load */
+  renderCommissie();
   </script>
 </body>
 </html>
