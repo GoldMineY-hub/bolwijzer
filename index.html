@@ -285,6 +285,15 @@
           <span>Categorie</span><span style="text-align:center">Variabel</span><span style="text-align:center">Vast</span><span style="text-align:right">Bij &euro;30</span>
         </div>
         <div class="comm-grid" id="commGrid"></div>
+        <button id="commToggle" onclick="toggleCommList()" style="width:100%;margin-top:8px;padding:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--blue-soft);font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;transition:all 0.2s;">Toon alle 28 categorieen &#8595;</button>
+        <div style="margin-top:20px;padding:16px 20px;background:var(--blue-glow);border:1px solid rgba(0,82,255,0.15);border-radius:var(--radius-sm);font-size:13px;line-height:1.7;">
+          <strong style="color:var(--text);display:block;margin-bottom:6px;">&#128161; Tips bij commissies</strong>
+          <span style="color:var(--text-dim);">
+            <strong style="color:var(--text);">Laagste commissie?</strong> Elektrisch Gereedschap (4,1%) en Dierenvoer (6%) zijn de goedkoopste categorieen. Maar lage commissie betekent vaak meer concurrentie.<br><br>
+            <strong style="color:var(--text);">Let op het vaste bedrag.</strong> Bij producten onder de &euro;10 weegt de vaste commissie (&euro;0,85) zwaar. Bij een product van &euro;8 is dat al 10,6% bovenop het percentage.<br><br>
+            <strong style="color:var(--text);">Subcategorieen.</strong> Bol.com kan afwijkende percentages hanteren per subcategorie. Check altijd het exacte bedrag in je verkoopaccount.
+          </span>
+        </div>
         <div class="aff-cta" style="margin-top:24px;">
           <div class="aff-icon">&#128200;</div>
           <div class="aff-text"><strong>Alle commissies automatisch verwerkt in je marge?</strong><span>Rylee rekent dit realtime door voor elk product in je assortiment.</span></div>
@@ -319,6 +328,14 @@
           </div>
         </div>
         <button class="calc-btn" onclick="berekenKoopblok()">Check mijn kans</button>
+        <div style="margin-top:20px;padding:16px 20px;background:var(--orange-glow);border:1px solid rgba(249,115,22,0.15);border-radius:var(--radius-sm);font-size:13px;line-height:1.7;">
+          <strong style="color:var(--text);display:block;margin-bottom:6px;">&#127942; Tips voor het koopblok</strong>
+          <span style="color:var(--text-dim);">
+            <strong style="color:var(--text);">Prijs weegt het zwaarst</strong> (ca. 45%), maar je hoeft niet de goedkoopste te zijn. Binnen 3-5% van de laagste prijs is vaak voldoende als je levertijd en prestaties goed zijn.<br><br>
+            <strong style="color:var(--text);">Levertijd maakt het verschil.</strong> "Morgen in huis" via VVB of LVB geeft een groot voordeel. Overweeg Verzenden via Bol als je dit nog niet doet.<br><br>
+            <strong style="color:var(--text);">Prestatiescore is cumulatief.</strong> Een slechte week beinvloedt je score wekenlang. Houd je klantvragen onder 5% en lever altijd op tijd.
+          </span>
+        </div>
         <div class="result" id="kbResult">
           <div style="text-align:center;">
             <div class="score-ring">
@@ -576,14 +593,23 @@
     {cat:'Film, Muziek & Games (+ mediatoeslag \u20AC1)',pct:15,vast:0},
     {cat:'Sieraden',pct:20.7,vast:0.85},
   ];
+  let commExpanded=false;
   function renderCommissie(filter=''){
     const g=document.getElementById('commGrid');g.innerHTML='';
-    commissies.filter(c=>c.cat.toLowerCase().includes(filter.toLowerCase())).forEach(c=>{
+    const filtered=commissies.filter(c=>c.cat.toLowerCase().includes(filter.toLowerCase()));
+    const isSearching=filter.length>0;
+    const showAll=commExpanded||isSearching;
+    const visible=showAll?filtered:filtered.slice(0,6);
+    visible.forEach(c=>{
       const total=(30*c.pct/100+c.vast).toFixed(2);
       g.innerHTML+=`<div class="comm-row"><span class="cat-name">${c.cat}</span><span class="cat-pct">${c.pct}%</span><span class="cat-vast">&euro;${c.vast.toFixed(2)}</span><span class="cat-total">&euro;${total}</span></div>`;
     });
+    const btn=document.getElementById('commToggle');
+    if(isSearching||filtered.length<=6){btn.style.display='none';}
+    else{btn.style.display='block';btn.textContent=commExpanded?'Toon minder \u2191':'Toon alle '+filtered.length+' categorieen \u2193';}
   }
-  function filterCommissie(v){renderCommissie(v);}
+  function toggleCommList(){commExpanded=!commExpanded;renderCommissie(document.getElementById('commSearch').value);}
+  function filterCommissie(v){commExpanded=false;renderCommissie(v);}
 
   /* ---- KOOPBLOK ---- */
   function berekenKoopblok(){
